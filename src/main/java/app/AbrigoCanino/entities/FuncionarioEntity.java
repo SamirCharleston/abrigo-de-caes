@@ -21,20 +21,15 @@ public class FuncionarioEntity {
     private Long id;
 
     @Column(nullable = false)
-    @NotNull
-    @NotBlank
     private String nome;
 
-    @NotNull
-    @NotBlank
+    @Column(nullable = false)
     private Long idade;
 
-    @NotNull
-    @NotBlank
+    @Column(nullable = false)
     private Long matricula;
 
-    @NotNull
-    @NotBlank
+    @Column(nullable = false)
     private String cpf;
 
 }

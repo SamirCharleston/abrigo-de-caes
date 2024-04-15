@@ -20,16 +20,13 @@ public class TutorEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private Long id;
 
-    @NotNull
-    @NotBlank
+   @Column(nullable = false)
     private String Nome;
 
-    @NotNull
-    @NotBlank
+    @Column(nullable = false)
     private String cpf;
 
-    @NotNull
-    @NotBlank
+    @Column(nullable = false)
     private String telefone;
 
 }
