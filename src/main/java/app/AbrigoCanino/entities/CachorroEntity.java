@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.loader.ast.internal.AbstractEntityBatchLoader;
 import org.springframework.boot.autoconfigure.web.WebProperties;
 
 @Entity
@@ -16,16 +17,11 @@ import org.springframework.boot.autoconfigure.web.WebProperties;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class CachorroEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private Long id;
-
+public class CachorroEntity extends AbstractEntity {
     @Column(nullable = false)
     private String nome;
 
     @Column(nullable = false)
     private String descricao;
-
 
 }
