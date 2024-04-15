@@ -21,12 +21,10 @@ public class CachorroEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private Long id;
 
-    @NotNull
-    @NotBlank
+    @Column(nullable = false)
     private String nome;
 
-    @NotNull
-    @NotBlank
+    @Column(nullable = false)
     private String descricao;
 
 
