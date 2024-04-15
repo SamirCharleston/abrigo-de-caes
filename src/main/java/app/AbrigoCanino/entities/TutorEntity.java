@@ -3,30 +3,19 @@ package app.AbrigoCanino.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @Entity
-@Table(name="tutores")
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-
-public class TutorEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private Long id;
-
-   @Column(nullable = false)
-    private String Nome;
-
+@Data
+@Table(name = "tutores", schema = "public")
+public class TutorEntity extends PessoaEntity{
+    @Column
+    private LocalDate dataRequerimento;
     @Column(nullable = false)
-    private String cpf;
-
-    @Column(nullable = false)
-    private String telefone;
-
+    private String contato;
+    @OneToMany
+    private List<RequerimentoEntity> requerimentos;
 }
