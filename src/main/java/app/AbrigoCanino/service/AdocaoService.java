@@ -21,9 +21,10 @@ public class AdocaoService {
             return adocaoRepository.findById(id).orElse(null);
         }
 
-        public AdocaoEntity saveOrUpdateAdocao(AdocaoService adocao) {
-            return adocaoRepository.save(adocao);
-        }
+
+//        public AdocaoEntity saveOrUpdateAdocao(AdocaoService adocao) {
+//            return adocaoRepository.save(adocao);
+//        }
 
         public void deleteAdocao(Long id) {
             adocaoRepository.deleteById(id);
