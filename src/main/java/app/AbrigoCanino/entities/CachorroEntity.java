@@ -10,6 +10,8 @@ import lombok.Setter;
 import org.hibernate.loader.ast.internal.AbstractEntityBatchLoader;
 import org.springframework.boot.autoconfigure.web.WebProperties;
 
+import java.time.LocalDate;
+
 @Entity
 @Table(name = "cachorros")
 @Getter
@@ -20,6 +22,30 @@ import org.springframework.boot.autoconfigure.web.WebProperties;
 public class CachorroEntity extends AbstractEntity {
     @Column(nullable = false)
     private String nome;
+
+    @Column(nullable = false)
+    private String raca;
+
+    @Column(nullable = false)
+    private int idadeAproximada;
+
+    @Column(nullable = false)
+    private boolean possuiDeficiencia;
+
+    @Column(nullable = false)
+    private String descricaoDaDeficiencia;
+
+    @Column(nullable = false)
+    private String observacaoDoAnimal;
+
+    @Column(nullable = false)
+    private Porte porte;
+
+    @Column(nullable = false)
+    private LocalDate dataDeAdocao;
+
+    @Column(nullable = false)
+    private LocalDate dataDeChegadaAoAbrigo;
 
     @Column(nullable = false)
     private String descricao;
