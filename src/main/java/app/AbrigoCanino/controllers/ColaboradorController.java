@@ -1,5 +1,6 @@
 package app.AbrigoCanino.controllers;
 
+import app.AbrigoCanino.configuracoes.EnderecoEndPoint;
 import app.AbrigoCanino.configuracoes.ObjetoResposta;
 import app.AbrigoCanino.entities.ColaboradorEntity;
 import app.AbrigoCanino.service.ColaboradorService;
@@ -14,7 +15,7 @@ import java.util.List;
 public class ColaboradorController {
     @Autowired
     private ColaboradorService colaboradorService;
-    @PostMapping("/cadastrar")
+    @PostMapping(EnderecoEndPoint.CADASTRAR)
     public ResponseEntity<ObjetoResposta<Void>> save(@RequestBody ColaboradorEntity colaborador){
         ObjetoResposta<Void> resposta = new ObjetoResposta<>();
         try{
@@ -25,7 +26,7 @@ public class ColaboradorController {
             return ResponseEntity.badRequest().body(resposta);
         }
     }
-    @GetMapping("/buscar-todos")
+    @GetMapping(EnderecoEndPoint.BUSCAR_ID)
     public ResponseEntity<ObjetoResposta<ColaboradorEntity>> findById(@RequestParam Long id){
         ObjetoResposta<ColaboradorEntity> resposta = new ObjetoResposta<>();
         try{
@@ -36,6 +37,7 @@ public class ColaboradorController {
             return ResponseEntity.badRequest().body(resposta);
         }
     }
+    @GetMapping(EnderecoEndPoint.LISTAR)
     public ResponseEntity<ObjetoResposta<List<ColaboradorEntity>>> findAll(){
         ObjetoResposta<List<ColaboradorEntity>> resposta = new ObjetoResposta<>();
         try{
@@ -46,6 +48,7 @@ public class ColaboradorController {
             return ResponseEntity.badRequest().body(resposta);
         }
     }
+    @PutMapping(EnderecoEndPoint.ATUALIZAR)
     public ResponseEntity<ObjetoResposta<Void>> update(@RequestBody ColaboradorEntity colaborador){
         ObjetoResposta<Void> resposta = new ObjetoResposta<>();
         try{
@@ -56,6 +59,7 @@ public class ColaboradorController {
             return ResponseEntity.badRequest().body(resposta);
         }
     }
+    @DeleteMapping(EnderecoEndPoint.DELETAR)
     public ResponseEntity<ObjetoResposta<Void>> delete(@RequestParam("id") Long id){
         ObjetoResposta<Void> resposta = new ObjetoResposta<>();
         try{
