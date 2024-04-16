@@ -1,4 +1,7 @@
 package app.AbrigoCanino.repositories;
 
-public interface FuncionarioRepository {
+import app.AbrigoCanino.entities.ColaboradorEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface FuncionarioRepository extends JpaRepository<ColaboradorEntity, Long> {
 }
