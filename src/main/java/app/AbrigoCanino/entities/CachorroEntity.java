@@ -1,5 +1,6 @@
 package app.AbrigoCanino.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -11,6 +12,7 @@ import org.hibernate.loader.ast.internal.AbstractEntityBatchLoader;
 import org.springframework.boot.autoconfigure.web.WebProperties;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "cachorros")
