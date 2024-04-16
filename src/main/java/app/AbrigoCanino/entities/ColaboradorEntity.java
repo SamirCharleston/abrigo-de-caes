@@ -10,6 +10,7 @@ public class ColaboradorEntity extends AbstractEntity{
     @Column(nullable = false)
     private String matricula;
 
-    @Column(nullable = false)
+    @Column
+    @Enumerated(EnumType.STRING)
     private Permissao permissao;
 }
