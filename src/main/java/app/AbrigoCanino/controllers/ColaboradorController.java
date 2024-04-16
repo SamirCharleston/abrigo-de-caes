@@ -1,24 +1,22 @@
 package app.AbrigoCanino.controllers;
 
-import app.AbrigoCanino.configuracoes.ObjtetoResposta;
+import app.AbrigoCanino.configuracoes.ObjetoResposta;
 import app.AbrigoCanino.entities.ColaboradorEntity;
 import app.AbrigoCanino.service.ColaboradorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "api/")
+@RequestMapping(value = "api/colaborador")
 public class ColaboradorController {
     @Autowired
     private ColaboradorService colaboradorService;
-    public ResponseEntity<ObjtetoResposta<Void>> save(@RequestBody ColaboradorEntity colaborador){
-        ObjtetoResposta<Void> resposta = new ObjtetoResposta<>();
+    @PostMapping("/cadastrar")
+    public ResponseEntity<ObjetoResposta<Void>> save(@RequestBody ColaboradorEntity colaborador){
+        ObjetoResposta<Void> resposta = new ObjetoResposta<>();
         try{
             resposta.setMensagem(colaboradorService.save(colaborador));
             return ResponseEntity.ok(resposta);
@@ -27,8 +25,9 @@ public class ColaboradorController {
             return ResponseEntity.badRequest().body(resposta);
         }
     }
-    public ResponseEntity<ObjtetoResposta<ColaboradorEntity>> findById(@RequestParam Long id){
-        ObjtetoResposta<ColaboradorEntity> resposta = new ObjtetoResposta<>();
+    @GetMapping("/buscar-todos")
+    public ResponseEntity<ObjetoResposta<ColaboradorEntity>> findById(@RequestParam Long id){
+        ObjetoResposta<ColaboradorEntity> resposta = new ObjetoResposta<>();
         try{
             resposta.setObjeto(colaboradorService.findById(id));
             return ResponseEntity.ok(resposta);
@@ -37,8 +36,8 @@ public class ColaboradorController {
             return ResponseEntity.badRequest().body(resposta);
         }
     }
-    public ResponseEntity<ObjtetoResposta<List<ColaboradorEntity>>> findAll(){
-        ObjtetoResposta<List<ColaboradorEntity>> resposta = new ObjtetoResposta<>();
+    public ResponseEntity<ObjetoResposta<List<ColaboradorEntity>>> findAll(){
+        ObjetoResposta<List<ColaboradorEntity>> resposta = new ObjetoResposta<>();
         try{
             resposta.setObjeto(colaboradorService.findAll());
             return ResponseEntity.ok(resposta);
@@ -47,8 +46,8 @@ public class ColaboradorController {
             return ResponseEntity.badRequest().body(resposta);
         }
     }
-    public ResponseEntity<ObjtetoResposta<Void>> update(@RequestBody ColaboradorEntity colaborador){
-        ObjtetoResposta<Void> resposta = new ObjtetoResposta<>();
+    public ResponseEntity<ObjetoResposta<Void>> update(@RequestBody ColaboradorEntity colaborador){
+        ObjetoResposta<Void> resposta = new ObjetoResposta<>();
         try{
             resposta.setMensagem(colaboradorService.update(colaborador));
             return ResponseEntity.ok(resposta);
@@ -57,8 +56,8 @@ public class ColaboradorController {
             return ResponseEntity.badRequest().body(resposta);
         }
     }
-    public ResponseEntity<ObjtetoResposta<Void>> delete(@RequestParam("id") Long id){
-        ObjtetoResposta<Void> resposta = new ObjtetoResposta<>();
+    public ResponseEntity<ObjetoResposta<Void>> delete(@RequestParam("id") Long id){
+        ObjetoResposta<Void> resposta = new ObjetoResposta<>();
         try{
             resposta.setMensagem(colaboradorService.delete(id));
             return ResponseEntity.ok(resposta);
