@@ -1,6 +1,9 @@
 package app.AbrigoCanino.controllers;
 
+import app.AbrigoCanino.configuracoes.EnderecoEndPoint;
+import app.AbrigoCanino.configuracoes.ObjetoResposta;
 import app.AbrigoCanino.entities.CachorroEntity;
+import app.AbrigoCanino.entities.ColaboradorEntity;
 import app.AbrigoCanino.service.CachorroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,52 +16,64 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/cachorros")
+@RequestMapping(value = "api/cachorro")
 public class CachorroController {
 
     @Autowired
     private CachorroService cachorroService;
-
-    @GetMapping
-    public ResponseEntity<List<CachorroEntity>> getAllCachorros() {
-        List<CachorroEntity> cachorros = cachorroService.getAllCachorros();
-        return new ResponseEntity<>(cachorros, HttpStatus.OK);
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<CachorroEntity> getCachorroById(@PathVariable Long id) {
-        CachorroEntity cachorro = cachorroService.getCachorroById(id);
-        if (cachorro == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    @PostMapping(EnderecoEndPoint.CADASTRAR)
+    public ResponseEntity<ObjetoResposta<Void>> save(@RequestBody CachorroEntity cachorro){
+        ObjetoResposta<Void> resposta = new ObjetoResposta<>();
+        try{
+            resposta.setMensagem(cachorroService.save(cachorro));
+            return ResponseEntity.ok(resposta);
+        } catch (Exception e){
+            resposta.setMensagem(e.getMessage());
+            return ResponseEntity.badRequest().body(resposta);
         }
-        return new ResponseEntity<>(cachorro, HttpStatus.OK);
     }
-
-    @PostMapping
-    public ResponseEntity<CachorroEntity> saveCachorro(@RequestBody CachorroEntity cachorro) {
-        CachorroEntity savedCachorro = cachorroService.saveOrUpdateCachorro(cachorro);
-        return new ResponseEntity<>(savedCachorro, HttpStatus.CREATED);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<CachorroEntity> updateCachorro(@PathVariable Long id, @RequestBody CachorroEntity cachorro) {
-        CachorroEntity existingCachorro = cachorroService.getCachorroById(id);
-        if (existingCachorro == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    @GetMapping(EnderecoEndPoint.BUSCAR_ID)
+    public ResponseEntity<ObjetoResposta<CachorroEntity>> findById(@RequestParam Long id){
+        ObjetoResposta<CachorroEntity> resposta = new ObjetoResposta<>();
+        try{
+            resposta.setObjeto(cachorroService.findById(id));
+            return ResponseEntity.ok(resposta);
+        } catch (Exception e){
+            resposta.setMensagem(e.getMessage());
+            return ResponseEntity.badRequest().body(resposta);
         }
-        cachorro.setId(id);
-        CachorroEntity updatedCachorro = cachorroService.saveOrUpdateCachorro(cachorro);
-        return new ResponseEntity<>(updatedCachorro, HttpStatus.OK);
     }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCachorro(@PathVariable Long id) {
-        CachorroEntity existingCachorro = cachorroService.getCachorroById(id);
-        if (existingCachorro == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    @GetMapping(EnderecoEndPoint.LISTAR)
+    public ResponseEntity<ObjetoResposta<List<CachorroEntity>>> findAll(){
+        ObjetoResposta<List<CachorroEntity>> resposta = new ObjetoResposta<>();
+        try{
+            resposta.setObjeto(cachorroService.findAll());
+            return ResponseEntity.ok(resposta);
+        } catch (Exception e){
+            resposta.setMensagem(e.getMessage());
+            return ResponseEntity.badRequest().body(resposta);
         }
-        cachorroService.deleteCachorro(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
+    @PutMapping(EnderecoEndPoint.ATUALIZAR)
+    public ResponseEntity<ObjetoResposta<Void>> update(@RequestBody CachorroEntity cachorro){
+        ObjetoResposta<Void> resposta = new ObjetoResposta<>();
+        try{
+            resposta.setMensagem(cachorroService.update(cachorro));
+            return ResponseEntity.ok(resposta);
+        } catch (Exception e){
+            resposta.setMensagem(e.getMessage());
+            return ResponseEntity.badRequest().body(resposta);
+        }
+    }
+    @DeleteMapping(EnderecoEndPoint.DELETAR)
+    public ResponseEntity<ObjetoResposta<Void>> delete(@RequestParam("id") Long id){
+        ObjetoResposta<Void> resposta = new ObjetoResposta<>();
+        try{
+            resposta.setMensagem(cachorroService.delete(id));
+            return ResponseEntity.ok(resposta);
+        } catch (Exception e){
+            resposta.setMensagem(e.getMessage());
+            return ResponseEntity.badRequest().body(resposta);
+        }
+    }
 }
