@@ -7,10 +7,12 @@ import app.AbrigoCanino.repositories.TutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TutorService {
     @Autowired
-    TutorRepository tutorRepository;
+    private TutorRepository tutorRepository;
 
     public String save(TutorEntity tutor) throws Exception {
         tutorRepository.save(tutor);
@@ -21,7 +23,7 @@ public class TutorService {
         return tutorRepository.findById(id).orElseThrow(() -> new Exception(MensagensDeErro.ID_NAO_ENCONTRADO));
     }
 
-    public Iterable<TutorEntity> findAll() throws Exception {
+    public List<TutorEntity> findAll() throws Exception {
         if(tutorRepository.findAll().isEmpty())
             throw new Exception(MensagensDeErro.LISTA_VAZIA);
         return tutorRepository.findAll();
@@ -33,8 +35,9 @@ public class TutorService {
     }
 
     public void delete(TutorEntity tutor) throws Exception{
-        if(!tutorRepository.existsById(tutor.getId()))
+        if(!tutorRepository.existsById(tutor.getId())){
             throw new Exception(MensagensDeErro.ID_NAO_ENCONTRADO);
+        }
         tutorRepository.delete(tutor);
     }
 }
