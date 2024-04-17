@@ -2,8 +2,12 @@ package app.AbrigoCanino.service;
 
 import app.AbrigoCanino.configuracoes.MensagensDeErro;
 import app.AbrigoCanino.configuracoes.MensagensDeSucesso;
+import app.AbrigoCanino.entities.CachorroEntity;
 import app.AbrigoCanino.entities.RequerimentoEntity;
+import app.AbrigoCanino.entities.TutorEntity;
+import app.AbrigoCanino.repositories.CachorroRepository;
 import app.AbrigoCanino.repositories.RequerimentoRepository;
+import app.AbrigoCanino.repositories.TutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +17,33 @@ import java.util.List;
 public class RequerimentoService {
     @Autowired
     private RequerimentoRepository requerimentoRepository;
+    @Autowired
+    TutorRepository tutorRepository;
+    @Autowired
+    private CachorroRepository cachorroRepository;
     public String save(RequerimentoEntity requerimento) throws Exception {
+
+        if(requerimento.getAutorDoRequerimento().getId() == null){
+            throw new Exception("Autor nao pode ser nulo");
+        }
+
+        TutorEntity tutor = tutorRepository
+                .findById(requerimento.getAutorDoRequerimento().getId())
+                .orElseThrow(() -> new Exception("Autor nao encontrado"));
+
+        if(requerimento.getCaesRequeridos().isEmpty()){
+            throw new Exception("A lista de caes nao pode ser vazia");
+        }
+
+        for(CachorroEntity c : requerimento.getCaesRequeridos()){
+            if(c.getId() == null){
+                throw new Exception("O cachorro nao pode ser nulo");
+            }
+            cachorroRepository
+                    .findById(c.getId())
+                    .orElseThrow(() -> new Exception("O cachorro " + c.getNome() + "  nao pode ser encontrado"));
+        };
+
         requerimentoRepository.save(requerimento);
         return MensagensDeSucesso.CADASTRO_SUCESSO;
     }
