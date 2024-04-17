@@ -15,6 +15,9 @@ public class TutorService {
     private TutorRepository tutorRepository;
 
     public String save(TutorEntity tutor) throws Exception {
+        if (tutor.getIdade()<18){
+            throw new Exception("Tutor nao deve ser menor de idade.");
+        }
         tutorRepository.save(tutor);
         return MensagensDeSucesso.CADASTRO_SUCESSO;
     }

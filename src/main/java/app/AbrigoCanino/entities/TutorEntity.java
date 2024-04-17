@@ -16,6 +16,9 @@ public class TutorEntity extends PessoaEntity{
     private LocalDate dataRequerimento;
     @Column(nullable = false)
     private String contato;
+    @Column(nullable = false)
+    private int idade;
+
     @OneToMany
     private List<RequerimentoEntity> requerimentos;
 }

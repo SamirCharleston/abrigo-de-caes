@@ -15,7 +15,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table(name = "cachorros")
+@Table(name = "cachorros", schema = "public")
 @Getter
 @Setter
 @AllArgsConstructor
