@@ -6,7 +6,7 @@ import lombok.*;
 @Entity
 @Data
 @Table(name = "colaboradores", schema = "public")
-public class ColaboradorEntity extends AbstractEntity{
+public class ColaboradorEntity extends PessoaEntity{
     @Column(nullable = false)
     private String matricula;
 
