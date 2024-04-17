@@ -34,10 +34,11 @@ public class TutorService {
         return MensagensDeSucesso.ALTERACAO_SUCESSO;
     }
 
-    public void delete(TutorEntity tutor) throws Exception{
-        if(!tutorRepository.existsById(tutor.getId())){
+    public String delete(Long id) throws Exception{
+        if(!tutorRepository.existsById(id)){
             throw new Exception(MensagensDeErro.ID_NAO_ENCONTRADO);
         }
-        tutorRepository.delete(tutor);
+        tutorRepository.delete(findById(id));
+        return MensagensDeSucesso.EXCLUSAO_SUCESSO;
     }
 }

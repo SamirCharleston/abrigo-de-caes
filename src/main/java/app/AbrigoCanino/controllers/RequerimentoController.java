@@ -2,8 +2,8 @@ package app.AbrigoCanino.controllers;
 
 import app.AbrigoCanino.configuracoes.EnderecoEndPoint;
 import app.AbrigoCanino.configuracoes.ObjetoResposta;
-import app.AbrigoCanino.entities.TutorEntity;
-import app.AbrigoCanino.service.TutorService;
+import app.AbrigoCanino.entities.RequerimentoEntity;
+import app.AbrigoCanino.service.RequerimentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,15 +11,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "api/tutor")
-public class TutorController {
+@RequestMapping(value = "api/requerimento")
+public class RequerimentoController {
     @Autowired
-    private TutorService tutorService;
+    private RequerimentoService requerimentoService;
     @PostMapping(EnderecoEndPoint.CADASTRAR)
-    public ResponseEntity<ObjetoResposta<Void>> save(@RequestBody TutorEntity tutor){
-        ObjetoResposta<Void> resposta = new ObjetoResposta<Void>();
+    public ResponseEntity<ObjetoResposta<Void>> save(@RequestBody RequerimentoEntity requerimento){
+        ObjetoResposta<Void> resposta = new ObjetoResposta<>();
         try{
-            resposta.setMensagem(tutorService.save(tutor));
+            resposta.setMensagem(requerimentoService.save(requerimento));
             return ResponseEntity.ok(resposta);
         } catch(Exception e){
             resposta.setMensagem(e.getMessage());
@@ -27,10 +27,10 @@ public class TutorController {
         }
     }
     @GetMapping(EnderecoEndPoint.BUSCAR_ID)
-    public ResponseEntity<ObjetoResposta<TutorEntity>> findById(@RequestParam Long id){
-        ObjetoResposta<TutorEntity> resposta = new ObjetoResposta<TutorEntity>();
+    public ResponseEntity<ObjetoResposta<RequerimentoEntity>> findById(@RequestParam Long id){
+        ObjetoResposta<RequerimentoEntity> resposta = new ObjetoResposta<>();
         try{
-            resposta.setObjeto(tutorService.findById(id));
+            resposta.setObjeto(requerimentoService.findById(id));
             return ResponseEntity.ok(resposta);
         } catch(Exception e){
             resposta.setMensagem(e.getMessage());
@@ -38,10 +38,10 @@ public class TutorController {
         }
     }
     @GetMapping(EnderecoEndPoint.LISTAR)
-    public ResponseEntity<ObjetoResposta<List<TutorEntity>>> findAll(){
-        ObjetoResposta<List<TutorEntity>> resposta = new ObjetoResposta<List<TutorEntity>>();
+    public ResponseEntity<ObjetoResposta<List<RequerimentoEntity>>> findAll(){
+        ObjetoResposta<List<RequerimentoEntity>> resposta = new ObjetoResposta<>();
         try{
-            resposta.setObjeto(tutorService.findAll());
+            resposta.setObjeto(requerimentoService.findAll());
             return ResponseEntity.ok(resposta);
         } catch(Exception e){
             resposta.setMensagem(e.getMessage());
@@ -49,10 +49,10 @@ public class TutorController {
         }
     }
     @PutMapping(EnderecoEndPoint.ATUALIZAR)
-    public ResponseEntity<ObjetoResposta<Void>> update(@RequestBody TutorEntity tutor){
-        ObjetoResposta<Void> resposta = new ObjetoResposta<Void>();
+    public ResponseEntity<ObjetoResposta<Void>> update(@RequestBody RequerimentoEntity requerimento){
+        ObjetoResposta<Void> resposta = new ObjetoResposta<>();
         try{
-            resposta.setMensagem(tutorService.update(tutor));
+            resposta.setMensagem(requerimentoService.update(requerimento));
             return ResponseEntity.ok(resposta);
         } catch(Exception e){
             resposta.setMensagem(e.getMessage());
@@ -61,9 +61,9 @@ public class TutorController {
     }
     @DeleteMapping(EnderecoEndPoint.DELETAR)
     public ResponseEntity<ObjetoResposta<Void>> delete(@RequestParam("id") Long id){
-        ObjetoResposta<Void> resposta = new ObjetoResposta<Void>();
+        ObjetoResposta<Void> resposta = new ObjetoResposta<>();
         try{
-            resposta.setMensagem(tutorService.delete(id));
+            resposta.setMensagem(requerimentoService.delete(id));
             return ResponseEntity.ok(resposta);
         } catch(Exception e){
             resposta.setMensagem(e.getMessage());
