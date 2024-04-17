@@ -1,4 +1,4 @@
 package app.AbrigoCanino.controllers;
 
-public class FuncionarioController {
+public class ColaboradorControllerTest {
 }

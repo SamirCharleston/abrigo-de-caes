@@ -13,4 +13,10 @@ public class ColaboradorEntity extends AbstractEntity{
     @Column
     @Enumerated(EnumType.STRING)
     private Permissao permissao;
+
+    @Column(nullable = false)
+    private String nome; // Novo campo nome
+
+    // Lombok irá gerar automaticamente os métodos getters e setters para o campo 'nome'
+
 }
