@@ -15,7 +15,7 @@ public class TutorService {
     private TutorRepository tutorRepository;
 
     public String save(TutorEntity tutor) throws Exception {
-        if (tutor.getIdade()<18){
+        if(!verificaMaioridade(tutor.getIdade())){
             throw new Exception("Tutor nao deve ser menor de idade.");
         }
         tutorRepository.save(tutor);
@@ -42,5 +42,8 @@ public class TutorService {
             throw new Exception(MensagensDeErro.ID_NAO_ENCONTRADO);
         }
         tutorRepository.delete(tutor);
+    }
+    public boolean verificaMaioridade(int idade){
+        return idade >= 18;
     }
 }
