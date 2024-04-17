@@ -18,7 +18,8 @@ public class TutorEntity extends PessoaEntity{
     private String contato;
     @Column(nullable = false)
     private int idade;
-
+    @Column
+    private String endereco;
     @OneToMany
     private List<RequerimentoEntity> requerimentos;
 }
