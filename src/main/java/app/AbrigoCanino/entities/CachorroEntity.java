@@ -47,6 +47,7 @@ public class CachorroEntity extends AbstractEntity {
     private String observacaoDoAnimal;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Porte porte;
 
     @Column(nullable = false)
