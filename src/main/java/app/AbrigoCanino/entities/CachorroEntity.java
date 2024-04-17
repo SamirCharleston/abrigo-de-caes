@@ -2,6 +2,7 @@ package app.AbrigoCanino.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -23,15 +24,20 @@ import java.util.List;
 
 public class CachorroEntity extends AbstractEntity {
     @Column(nullable = false)
+    @NotBlank(message = "O nome do cachorro não pode estar em branco")
     private String nome;
 
     @Column(nullable = false)
+    @NotBlank(message = "A raça do cachorro não pode estar em branco")
     private String raca;
 
     @Column(nullable = false)
+    @NotNull(message = "A idade aproximada do cachorro não pode ser nula")
+    @Min(value = 1, message = "A idade aproximada do cachorro deve ser maior que zero")
     private int idadeAproximada;
 
     @Column(nullable = false)
+    @NotNull(message = "A descrição do cachorro não pode estar em branco")
     private boolean possuiDeficiencia;
 
     @Column(nullable = false)
@@ -50,6 +56,7 @@ public class CachorroEntity extends AbstractEntity {
     private LocalDate dataDeChegadaAoAbrigo;
 
     @Column(nullable = false)
+    @NotBlank(message = "A descrição do cachorro não pode estar em branco")
     private String descricao;
 
 }

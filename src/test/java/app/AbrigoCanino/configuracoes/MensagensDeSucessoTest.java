@@ -11,4 +11,13 @@ public class MensagensDeSucessoTest {
         assertEquals("Alteração realizada com sucesso!", MensagensDeSucesso.ALTERACAO_SUCESSO);
         assertEquals("Exclusão realizada com sucesso!", MensagensDeSucesso.EXCLUSAO_SUCESSO);
     }
+
+    @Test
+    void testConstantes() {
+        // Assert
+        assertEquals("Cadastro realizado com sucesso!", MensagensDeSucesso.CADASTRO_SUCESSO);
+        assertEquals("Alteração realizada com sucesso!", MensagensDeSucesso.ALTERACAO_SUCESSO);
+        assertEquals("Exclusão realizada com sucesso!", MensagensDeSucesso.EXCLUSAO_SUCESSO);
+    }
+
 }

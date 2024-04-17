@@ -12,4 +12,13 @@ public class MensagensDeErroTest {
         assertEquals("Não encontrado", MensagensDeErro.ERRO_NAO_ENCONTRADO);
         assertEquals("Lista vazia", MensagensDeErro.LISTA_VAZIA);
     }
+
+    @Test
+    void testConstantes() {
+        // Assert
+        assertEquals("Id não encontrado", MensagensDeErro.ID_NAO_ENCONTRADO);
+        assertEquals("Não encontrado", MensagensDeErro.ERRO_NAO_ENCONTRADO);
+        assertEquals("Lista vazia", MensagensDeErro.LISTA_VAZIA);
+    }
+
 }

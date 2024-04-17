@@ -5,10 +5,12 @@ import app.AbrigoCanino.configuracoes.MensagensDeErro;
 import app.AbrigoCanino.configuracoes.MensagensDeSucesso;
 import app.AbrigoCanino.entities.TutorEntity;
 import app.AbrigoCanino.repositories.TutorRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
@@ -81,12 +83,12 @@ public class TutorServiceTest {
     }
 
     @Test
-    void testDeleteTutor() throws Exception {
-        TutorEntity tutor = new TutorEntity();
-        tutor.setId(1L);
-        when(tutorRepository.existsById(1L)).thenReturn(true);
-        tutorService.delete(tutor);
-        verify(tutorRepository, times(1)).delete(tutor);
+    public void testDeleteTutor() throws Exception {
+        Long id = 1L;
+
+        Mockito.when(tutorRepository.findById(id)).thenReturn(Optional.empty());
+        Exception exception = Assertions.assertThrows(Exception.class, () -> tutorService.delete(id));
+        Assertions.assertEquals(MensagensDeErro.ID_NAO_ENCONTRADO, exception.getMessage());
     }
 
     @Test
@@ -94,7 +96,7 @@ public class TutorServiceTest {
         TutorEntity tutor = new TutorEntity();
         tutor.setId(1L);
         when(tutorRepository.existsById(1L)).thenReturn(false);
-        Exception exception = assertThrows(Exception.class, () -> tutorService.delete(tutor));
+        Exception exception = assertThrows(Exception.class, () -> tutorService.delete(tutor.getId()));
         assertEquals(MensagensDeErro.ID_NAO_ENCONTRADO, exception.getMessage());
     }
 
