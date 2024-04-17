@@ -23,4 +23,6 @@ public class TutorEntity extends PessoaEntity{
 
     @OneToMany
     private List<RequerimentoEntity> requerimentos;
+
+
 }
