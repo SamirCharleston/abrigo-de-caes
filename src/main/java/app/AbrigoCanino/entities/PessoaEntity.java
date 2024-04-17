@@ -11,4 +11,5 @@ public abstract class PessoaEntity extends AbstractEntity{
     private String cpf;
     @Column
     private String rg;
+
 }

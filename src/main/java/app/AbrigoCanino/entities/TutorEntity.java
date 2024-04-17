@@ -10,6 +10,8 @@ import java.util.List;
 
 @Entity
 @Data
+@Getter
+@Setter
 @Table(name = "tutores", schema = "public")
 public class TutorEntity extends PessoaEntity{
     @Column
