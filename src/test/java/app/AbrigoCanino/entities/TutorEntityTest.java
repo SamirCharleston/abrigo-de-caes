@@ -12,8 +12,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 
+// Classe de teste para TutorEntity
 public class TutorEntityTest {
 
+    // Teste para verificar a igualdade entre dois objetos TutorEntity
     @Test
     void testEquals() {
         // Arrange
@@ -35,6 +37,7 @@ public class TutorEntityTest {
         assertEquals(tutor1, tutor2);
     }
 
+    // Teste para verificar a diferença entre dois objetos TutorEntity
     @Test
     void testNotEquals() {
         // Arrange
@@ -52,6 +55,7 @@ public class TutorEntityTest {
         assertNotEquals(tutor1, tutor2);
     }
 
+    // Teste para verificar o hashCode de dois objetos TutorEntity iguais
     @Test
     void testHashCodeEqualObjects() {
         // Arrange
@@ -73,6 +77,7 @@ public class TutorEntityTest {
         assertEquals(tutor1.hashCode(), tutor2.hashCode());
     }
 
+    // Teste para verificar o hashCode de dois objetos TutorEntity diferentes
     @Test
     void testHashCodeDifferentObjects() {
         // Arrange

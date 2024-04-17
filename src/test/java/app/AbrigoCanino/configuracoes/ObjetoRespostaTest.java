@@ -4,8 +4,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// Classe de teste para ObjetoResposta
 public class ObjetoRespostaTest {
 
+    // Teste para verificar o construtor e os getters da classe ObjetoResposta
     @Test
     void testConstructorAndGetters() {
         // Arrange
@@ -22,6 +24,7 @@ public class ObjetoRespostaTest {
         assertEquals(objeto, resposta.getObjeto());
     }
 
+    // Teste para verificar o método toString da classe ObjetoResposta
     @Test
     void testToString() {
         // Arrange
@@ -38,6 +41,7 @@ public class ObjetoRespostaTest {
         assertEquals("ObjetoResposta(mensagem=Mensagem de teste, objeto=42)", toString);
     }
 
+    // Teste para verificar o método equals da classe ObjetoResposta
     @Test
     void testEquals() {
         // Arrange
@@ -59,6 +63,7 @@ public class ObjetoRespostaTest {
         assertNotEquals(resposta2, resposta3); // resposta2.equals(resposta3)
     }
 
+    // Teste para verificar os setters da classe ObjetoResposta
     @Test
     void testObjetoRespostaSetter() {
         // Arrange
@@ -76,6 +81,7 @@ public class ObjetoRespostaTest {
         assertEquals(objeto, resposta.getObjeto(), "O objeto deve ser igual ao objeto fornecido.");
     }
 
+    // Teste para verificar os getters e setters da classe ObjetoResposta
     @Test
     void testObjetoRespostaGettersAndSetters() {
         // Arrange
@@ -93,6 +99,7 @@ public class ObjetoRespostaTest {
         assertEquals(objeto, resposta.getObjeto());
     }
 
+    // Teste para verificar o construtor padrão da classe ObjetoResposta
     @Test
     void testObjetoRespostaDefaultConstructor() {
         // Arrange

@@ -21,12 +21,14 @@ public class CachorroEntityTest {
 
     @BeforeAll
     static void setUpValidator() {
+        // Configuração do validador antes de todos os testes
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
     }
 
     @BeforeEach
     void setUp() {
+        // Configuração do validador antes de cada teste
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
     }
@@ -34,6 +36,7 @@ public class CachorroEntityTest {
     @Test
     void cachorroEntity_AllAttributesValid_ShouldNotViolateConstraints() {
         // Arrange
+        // Cria um cachorro com todos os atributos válidos
         CachorroEntity cachorro = new CachorroEntity(
                 "Belinha",
                 "Vira-lata",
@@ -57,6 +60,7 @@ public class CachorroEntityTest {
     @Test
     void cachorroEntity_ValidAttributes_ShouldNotViolateConstraints() {
         // Arrange
+        // Cria um cachorro com atributos válidos
         CachorroEntity cachorro = new CachorroEntity(
                 "Rex",
                 "Labrador",
@@ -80,9 +84,10 @@ public class CachorroEntityTest {
     @Test
     void cachorroEntity_NullRaca_ShouldViolateNotBlankConstraint() {
         // Arrange
+        // Cria um cachorro com raça nula, violando a restrição NotBlank
         CachorroEntity cachorro = new CachorroEntity(
                 "Rex",
-                null, // Raca is null
+                null, // Raca é nula
                 3,
                 false,
                 "",
@@ -103,10 +108,11 @@ public class CachorroEntityTest {
     @Test
     void cachorroEntity_InvalidIdadeAproximada_ShouldViolateMinConstraint() {
         // Arrange
+        // Cria um cachorro com idade aproximada inválida, violando a restrição Min
         CachorroEntity cachorro = new CachorroEntity(
                 "Rex",
                 "Labrador",
-                0, // Invalid idadeAproximada (less than 1)
+                0, // Idade aproximada inválida (menor que 1)
                 false,
                 "",
                 "Cachorro amigável e brincalhão",
@@ -126,6 +132,7 @@ public class CachorroEntityTest {
     @Test
     void cachorroEntity_NonEmptyDescricao_ShouldNotBeEmpty() {
         // Arrange
+        // Cria um cachorro e define uma descrição não vazia
         CachorroEntity cachorro = new CachorroEntity();
         cachorro.setDescricao("Descrição do cachorro");
 
@@ -139,6 +146,7 @@ public class CachorroEntityTest {
     @Test
     void cachorroEntity_NonEmptyPossuiDeficiencia_ShouldNotBeEmpty() {
         // Arrange
+        // Cria um cachorro e define que possui deficiência
         CachorroEntity cachorro = new CachorroEntity();
         cachorro.setPossuiDeficiencia(true);
 

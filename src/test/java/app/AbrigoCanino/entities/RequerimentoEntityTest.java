@@ -19,6 +19,8 @@ public class RequerimentoEntityTest {
 
     @Test
     void testAutorDoRequerimento() {
+        // Testa se o autor do requerimento é definido corretamente
+
         // Arrange
         TutorEntity tutor = new TutorEntity();
         tutor.setNome("João");
@@ -36,6 +38,8 @@ public class RequerimentoEntityTest {
 
     @Test
     void testCaesRequeridos() {
+        // Testa se os cães requeridos são definidos corretamente
+
         // Arrange
         CachorroEntity cachorro1 = new CachorroEntity();
         cachorro1.setNome("Rex");
@@ -58,6 +62,8 @@ public class RequerimentoEntityTest {
 
     @Test
     void testGetSetAutorDoRequerimento() {
+        // Testa os métodos getter e setter para o autor do requerimento
+
         // Arrange
         RequerimentoEntity requerimentoEntity = new RequerimentoEntity();
         TutorEntity tutorEntity = new TutorEntity();
@@ -71,6 +77,8 @@ public class RequerimentoEntityTest {
 
     @Test
     void testGetSetCaesRequeridos() {
+        // Testa os métodos getter e setter para os cães requeridos
+
         // Arrange
         RequerimentoEntity requerimentoEntity = new RequerimentoEntity();
         CachorroEntity cachorroEntity = new CachorroEntity();
@@ -86,6 +94,8 @@ public class RequerimentoEntityTest {
 
     @Test
     void testNoArgsConstructor() {
+        // Testa se o construtor padrão cria uma instância não nula
+
         // Act
         RequerimentoEntity requerimentoEntity = new RequerimentoEntity();
 
@@ -95,6 +105,8 @@ public class RequerimentoEntityTest {
 
     @Test
     void testId() {
+        // Testa se o método getId() retorna o ID corretamente
+
         // Arrange
         RequerimentoEntity requerimento = new RequerimentoEntity();
         requerimento.setId(1L);
@@ -106,9 +118,10 @@ public class RequerimentoEntityTest {
         assertEquals(1L, id);
     }
 
-
     @Test
     void testEquals() {
+        // Testa se dois requerimentos com o mesmo autor são iguais
+
         // Arrange
         TutorEntity tutor1 = new TutorEntity();
         tutor1.setId(1L);
@@ -127,9 +140,10 @@ public class RequerimentoEntityTest {
         assertEquals(requerimento1.hashCode(), requerimento2.hashCode());
     }
 
-
     @Test
     void testNullAutorDoRequerimento() {
+        // Testa se o método getAutorDoRequerimento() retorna null quando não há autor definido
+
         // Arrange
         RequerimentoEntity requerimento = new RequerimentoEntity();
 
@@ -139,7 +153,5 @@ public class RequerimentoEntityTest {
         // Assert
         assertNull(autor);
     }
-
-
-
 }
+

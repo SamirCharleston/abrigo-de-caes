@@ -20,19 +20,24 @@ public class ColaboradorEntityTest {
 
     @BeforeAll
     static void setUpValidator() {
+        // Configuração do validador antes de todos os testes
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
     }
 
     @BeforeEach
     void setUp() {
+        // Configuração do validador antes de cada teste
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
     }
 
     @Test
     void testColaboradorEntity_ValidAttributes_ShouldNotViolateConstraints() {
+        // Testa se um colaborador com atributos válidos não viola as restrições de validação
+
         // Arrange
+        // Cria um colaborador com atributos válidos
         ColaboradorEntity colaborador = new ColaboradorEntity();
         colaborador.setMatricula("12345");
         colaborador.setPermissao(Permissao.ADMIN);
@@ -45,10 +50,12 @@ public class ColaboradorEntityTest {
         assertTrue(violations.isEmpty(), "Não deve violar nenhuma restrição de validação.");
     }
 
-
     @Test
     void testColaboradorEntity_NullPermissao_ShouldNotViolateConstraints() {
+        // Testa se um colaborador com permissão nula não viola as restrições de validação
+
         // Arrange
+        // Cria um colaborador com a permissão nula
         ColaboradorEntity colaborador = new ColaboradorEntity();
         colaborador.setMatricula("67890");
         colaborador.setNome("Ciclano");
@@ -60,10 +67,10 @@ public class ColaboradorEntityTest {
         assertTrue(violations.isEmpty(), "Não deve violar nenhuma restrição de validação.");
     }
 
-
-
     @Test
     void testSetMatricula() {
+        // Testa o método de configuração da matrícula do colaborador
+
         // Arrange
         ColaboradorEntity colaborador = new ColaboradorEntity();
         String matricula = "654321";
@@ -77,6 +84,8 @@ public class ColaboradorEntityTest {
 
     @Test
     void testSetPermissao() {
+        // Testa o método de configuração da permissão do colaborador
+
         // Arrange
         ColaboradorEntity colaborador = new ColaboradorEntity();
         Permissao permissao = Permissao.ADMIN;
@@ -90,6 +99,8 @@ public class ColaboradorEntityTest {
 
     @Test
     void testSetNome() {
+        // Testa o método de configuração do nome do colaborador
+
         // Arrange
         ColaboradorEntity colaborador = new ColaboradorEntity();
         String nome = "Maria";
@@ -103,6 +114,8 @@ public class ColaboradorEntityTest {
 
     @Test
     void testToString() {
+        // Testa o método de conversão para String do colaborador
+
         // Arrange
         ColaboradorEntity colaborador = new ColaboradorEntity();
         colaborador.setMatricula("123456");
@@ -119,6 +132,8 @@ public class ColaboradorEntityTest {
 
     @Test
     void testSetAndGetId() {
+        // Testa os métodos de configuração e obtenção do ID do colaborador
+
         // Arrange
         ColaboradorEntity colaborador = new ColaboradorEntity();
         Long id = 1L;
@@ -129,7 +144,5 @@ public class ColaboradorEntityTest {
         // Assert
         assertEquals(id, colaborador.getId());
     }
-
-
 
 }

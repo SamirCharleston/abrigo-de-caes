@@ -34,13 +34,15 @@ class TutorControllerTest {
     @Test
     void save_TutorValido_DeveRetornarStatusOk() throws Exception {
         // Arrange
+        // Configuração do cenário (Arrange)
         TutorEntity tutor = new TutorEntity();
         when(tutorService.save(tutor)).thenReturn("Tutor cadastrado com sucesso.");
 
-        // Act
+        // Ação (Act)
         ResponseEntity<ObjetoResposta<Void>> responseEntity = tutorController.save(tutor);
 
         // Assert
+        // Verificação dos resultados da ação (Assert)
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         verify(tutorService, times(1)).save(tutor);
     }
@@ -48,14 +50,16 @@ class TutorControllerTest {
     @Test
     void findById_IdExistente_DeveRetornarStatusOk() throws Exception {
         // Arrange
+        // Configuração do cenário (Arrange)
         Long id = 1L;
         TutorEntity tutor = new TutorEntity();
         when(tutorService.findById(id)).thenReturn(tutor);
 
-        // Act
+        // Ação (Act)
         ResponseEntity<ObjetoResposta<TutorEntity>> responseEntity = tutorController.findById(id);
 
         // Assert
+        // Verificação dos resultados da ação (Assert)
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         verify(tutorService, times(1)).findById(id);
     }
@@ -63,6 +67,7 @@ class TutorControllerTest {
     @Test
     void findAll_TutoresExistentes_DeveRetornarStatusOk() throws Exception {
         // Arrange
+        // Configuração do cenário (Arrange)
         List<TutorEntity> tutores = new ArrayList<>();
         TutorEntity tutor1 = new TutorEntity();
         TutorEntity tutor2 = new TutorEntity();
@@ -70,10 +75,11 @@ class TutorControllerTest {
         tutores.add(tutor2);
         when(tutorService.findAll()).thenReturn(tutores);
 
-        // Act
+        // Ação (Act)
         ResponseEntity<ObjetoResposta<List<TutorEntity>>> responseEntity = tutorController.findAll();
 
         // Assert
+        // Verificação dos resultados da ação (Assert)
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         verify(tutorService, times(1)).findAll();
     }
@@ -81,13 +87,15 @@ class TutorControllerTest {
     @Test
     void update_TutorValido_DeveRetornarStatusOk() throws Exception {
         // Arrange
+        // Configuração do cenário (Arrange)
         TutorEntity tutor = new TutorEntity();
         when(tutorService.update(tutor)).thenReturn("Tutor atualizado com sucesso.");
 
-        // Act
+        // Ação (Act)
         ResponseEntity<ObjetoResposta<Void>> responseEntity = tutorController.update(tutor);
 
         // Assert
+        // Verificação dos resultados da ação (Assert)
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         verify(tutorService, times(1)).update(tutor);
     }
@@ -95,13 +103,15 @@ class TutorControllerTest {
     @Test
     void delete_IdExistente_DeveRetornarStatusOk() throws Exception {
         // Arrange
+        // Configuração do cenário (Arrange)
         Long id = 1L;
         when(tutorService.delete(id)).thenReturn("Tutor removido com sucesso.");
 
-        // Act
+        // Ação (Act)
         ResponseEntity<ObjetoResposta<Void>> responseEntity = tutorController.delete(id);
 
         // Assert
+        // Verificação dos resultados da ação (Assert)
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         verify(tutorService, times(1)).delete(id);
     }
@@ -109,13 +119,15 @@ class TutorControllerTest {
     @Test
     void save_TutorInvalido_DeveRetornarBadRequest() throws Exception {
         // Arrange
+        // Configuração do cenário (Arrange)
         TutorEntity tutor = new TutorEntity();
         when(tutorService.save(tutor)).thenThrow(new IllegalArgumentException("Tutor inválido"));
 
-        // Act
+        // Ação (Act)
         ResponseEntity<ObjetoResposta<Void>> responseEntity = tutorController.save(tutor);
 
         // Assert
+        // Verificação dos resultados da ação (Assert)
         assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode());
         verify(tutorService, times(1)).save(tutor);
     }
