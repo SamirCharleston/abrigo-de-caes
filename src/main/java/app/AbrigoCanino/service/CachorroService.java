@@ -11,8 +11,12 @@ import java.util.List;
 
 @Service
 public class CachorroService {
+    private final CachorroRepository cachorroRepository; // Declarar a variável cachorroRepository
+
     @Autowired
-    private CachorroRepository cachorroRepository;
+    public CachorroService(CachorroRepository cachorroRepository) {
+        this.cachorroRepository = cachorroRepository; // Inicializar a variável cachorroRepository
+    }
 
     public String save(CachorroEntity cachorro) throws Exception{
         cachorroRepository.save(cachorro);
