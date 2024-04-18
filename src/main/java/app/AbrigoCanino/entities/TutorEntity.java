@@ -18,7 +18,7 @@ public class TutorEntity extends PessoaEntity{
     private LocalDate dataRequerimento;
     @Column(nullable = false)
     private String contato;
-    @Positive(message = "A idade deve ser um valor positivo")
+    @NotBlank
     @Column(nullable = false)
     private int idade;
     @NotBlank(message = "O endereco nao pode ser em branco")

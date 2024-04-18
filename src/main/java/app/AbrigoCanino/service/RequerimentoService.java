@@ -26,7 +26,6 @@ public class RequerimentoService {
         if(requerimento.getAutorDoRequerimento().getId() == null){
             throw new Exception("Autor nao pode ser nulo");
         }
-
         TutorEntity tutor = tutorRepository
                 .findById(requerimento.getAutorDoRequerimento().getId())
                 .orElseThrow(() -> new Exception("Autor nao encontrado"));
