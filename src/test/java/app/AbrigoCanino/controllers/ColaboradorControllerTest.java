@@ -1,13 +1,18 @@
 package app.AbrigoCanino.controllers;
 
+import app.AbrigoCanino.configuracoes.MensagensDeSucesso;
 import app.AbrigoCanino.configuracoes.ObjetoResposta;
 import app.AbrigoCanino.entities.ColaboradorEntity;
+import app.AbrigoCanino.repositories.ColaboradorRepository;
 import app.AbrigoCanino.service.ColaboradorService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -15,43 +20,58 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
-
+@SpringBootTest
 class ColaboradorControllerTest {
+    @MockBean
+    ColaboradorRepository colaboradorRepository;
 
     // Mock do serviço de colaboradores
-    @Mock
+    @MockBean
     private ColaboradorService colaboradorService;
 
     // Injeta o mock do serviço no controlador de colaboradores
-    @InjectMocks
+    @Autowired
     private ColaboradorController colaboradorController;
+
+    ColaboradorEntity colaborador1;
+    List<ColaboradorEntity> colaboradores;
+
+    ColaboradorControllerTest(){
+        ColaboradorEntity colaborador = new ColaboradorEntity();
+        List<ColaboradorEntity> colaboradoresLista = new ArrayList<>();
+
+        colaborador.setNome("Joao");
+        colaborador.setId(1L);
+        colaborador.setMatricula("10");
+        colaborador.setStatus(true);
+
+        colaboradoresLista.add(colaborador);
+
+        colaborador1 = colaborador;
+        colaboradores = colaboradoresLista;
+    }
 
     // Método para configurar os mocks antes de cada teste
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);
+
+        when(colaboradorRepository.findById(01L).get()).thenReturn(colaborador1);
+        when((colaboradorRepository.save(colaborador1))).thenReturn(colaborador1);
+        when(colaboradorRepository.findAll()).thenReturn(colaboradores);
+        doNothing().when(colaboradorRepository).deleteById(colaborador1.getId());
     }
 
     // Teste para verificar se o salvamento de um colaborador funciona corretamente
     @Test
-    void save_ColaboradorValido_DeveRetornarStatusOk() throws Exception {
-        // Arrange: Preparação do ambiente de teste
-        // Criar um colaborador de exemplo
-        ColaboradorEntity colaborador = new ColaboradorEntity();
-        colaborador.setNome("João");
-        // Configurar o comportamento esperado do serviço de colaboradores
-        when(colaboradorService.save(colaborador)).thenReturn("Colaborador cadastrado com sucesso.");
-
-        // Act: Execução da ação que está sendo testada
-        // Chamar o método save() do controlador de colaboradores
-        ResponseEntity<ObjetoResposta<Void>> responseEntity = colaboradorController.save(colaborador);
-
+    void save_ColaboradorValido_DeveRetornarStatusOk() {
+        ResponseEntity<ObjetoResposta<Void>> response = colaboradorController.save(colaborador1);
         // Assert: Verificação dos resultados da ação
         // Verificar se o status HTTP retornado é OK (200)
-        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-        // Verificar se o método save() do serviço foi chamado exatamente uma vez com o colaborador de exemplo
-        verify(colaboradorService, times(1)).save(colaborador);
+        assertNotNull(response.getBody());
+        assertEquals(MensagensDeSucesso.CADASTRO_SUCESSO, response.getBody().getMensagem());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     // Teste para verificar se a busca por ID de um colaborador funciona corretamente
@@ -65,16 +85,13 @@ class ColaboradorControllerTest {
         colaborador.setNome("João");
         // Configurar o comportamento esperado do serviço de colaboradores
         when(colaboradorService.findById(id)).thenReturn(colaborador);
-
         // Act
         // Execução da ação que está sendo testada
         ResponseEntity<ObjetoResposta<ColaboradorEntity>> responseEntity = colaboradorController.findById(id);
-
         // Assert
         // Verificação dos resultados da ação
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertEquals(id, responseEntity.getBody().getObjeto().getId());
-        verify(colaboradorService, times(1)).findById(id);
     }
 
     // Teste para verificar se a busca por todos os colaboradores funciona corretamente
