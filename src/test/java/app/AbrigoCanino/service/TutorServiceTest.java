@@ -53,6 +53,10 @@ public class TutorServiceTest {
     }
     @Test
     public void verificaMaioridade_TutorEMaiorDeIdade_RetornaTrue() {
-        assertTrue(tutorService.);
+        assertTrue(tutorService.verificaMaioridade(tutor1.getIdade()));
+    }
+    @Test
+    public void verificaMaioridade_TutorNAoEMaiorDeIdade_RetornaFalse() {
+        assertFalse(tutorService.verificaMaioridade(17));
     }
 }
