@@ -30,8 +30,7 @@ class RequerimentoControllerTest {
 
     // Método para configurar os mocks antes de cada teste
     @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
+    void setUp() {;
     }
 
     // Teste para verificar se a atualização de um requerimento funciona corretamente

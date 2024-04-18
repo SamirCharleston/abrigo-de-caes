@@ -4,6 +4,7 @@ import app.AbrigoCanino.configuracoes.EnderecoEndPoint;
 import app.AbrigoCanino.configuracoes.ObjetoResposta;
 import app.AbrigoCanino.entities.ColaboradorEntity;
 import app.AbrigoCanino.service.ColaboradorService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ public class ColaboradorController {
     @Autowired
     private ColaboradorService colaboradorService;
     @PostMapping(EnderecoEndPoint.CADASTRAR)
-    public ResponseEntity<ObjetoResposta<Void>> save(@RequestBody ColaboradorEntity colaborador){
+    public ResponseEntity<ObjetoResposta<Void>> save(@RequestBody @Valid ColaboradorEntity colaborador){
         ObjetoResposta<Void> resposta = new ObjetoResposta<>();
         try{
             resposta.setMensagem(colaboradorService.save(colaborador));
@@ -49,7 +50,7 @@ public class ColaboradorController {
         }
     }
     @PutMapping(EnderecoEndPoint.ATUALIZAR)
-    public ResponseEntity<ObjetoResposta<Void>> update(@RequestBody ColaboradorEntity colaborador){
+    public ResponseEntity<ObjetoResposta<Void>> update(@RequestBody @Valid ColaboradorEntity colaborador){
         ObjetoResposta<Void> resposta = new ObjetoResposta<>();
         try{
             resposta.setMensagem(colaboradorService.update(colaborador));
