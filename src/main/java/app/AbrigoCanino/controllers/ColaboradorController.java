@@ -1,6 +1,7 @@
 package app.AbrigoCanino.controllers;
 
 import app.AbrigoCanino.configuracoes.EnderecoEndPoint;
+import app.AbrigoCanino.configuracoes.MensagensDeSucesso;
 import app.AbrigoCanino.configuracoes.ObjetoResposta;
 import app.AbrigoCanino.entities.ColaboradorEntity;
 import app.AbrigoCanino.service.ColaboradorService;
@@ -60,15 +61,17 @@ public class ColaboradorController {
             return ResponseEntity.badRequest().body(resposta);
         }
     }
-    @DeleteMapping(EnderecoEndPoint.DELETAR)
-    public ResponseEntity<ObjetoResposta<Void>> delete(@RequestParam("id") Long id){
+    @DeleteMapping("/colaborador")
+    public ResponseEntity<ObjetoResposta<Void>> delete(@RequestParam("id") Long id) {
         ObjetoResposta<Void> resposta = new ObjetoResposta<>();
-        try{
-            resposta.setMensagem(colaboradorService.delete(id));
+        try {
+            String mensagem = colaboradorService.delete(id);
+            resposta.setMensagem(mensagem);
             return ResponseEntity.ok(resposta);
-        } catch (Exception e){
+        } catch (Exception e) {
             resposta.setMensagem(e.getMessage());
             return ResponseEntity.badRequest().body(resposta);
         }
     }
-}
+    }
+

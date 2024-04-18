@@ -58,8 +58,10 @@ public class RequerimentoService {
         return requerimentoRepository.findAll();
     }
 
-    public String update(RequerimentoEntity requerimento) {
-        requerimentoRepository.save(requerimento);
+    public String update(RequerimentoEntity requerimento) throws Exception {
+        RequerimentoEntity requerimentoExistente = requerimentoRepository.findById(requerimento.getId())
+                .orElseThrow(() -> new Exception(MensagensDeErro.ID_NAO_ENCONTRADO));
+        requerimentoRepository.save(requerimentoExistente);
         return MensagensDeSucesso.ALTERACAO_SUCESSO;
     }
 

@@ -57,6 +57,8 @@ public class ColaboradorControllerTest {
         colaboradores = colaboradoresLista;
 
         when(colaboradorRepository.existsById(1L)).thenReturn(true);
+        when(colaboradorRepository.existsById(2L)).thenReturn(false);
+        doNothing().when(colaboradorRepository).deleteById(1L);
         when(colaboradorRepository.findById(2L)).thenReturn(Optional.empty());
         when(colaboradorRepository.findById(1L)).thenReturn(Optional.of(colaborador));
         when((colaboradorRepository.save(colaborador))).thenReturn(colaborador);
@@ -119,7 +121,7 @@ public class ColaboradorControllerTest {
     }
 
     @Test
-    void delete_TutorExistente_DeveRetornarStatusOk() {
+    void delete_ColaboradorExistente_DeveRetornarStatusOk() {
         ResponseEntity<ObjetoResposta<Void>> response = colaboradorController.delete(1L);
 
         assertNotNull(response.getBody());
@@ -140,5 +142,6 @@ public class ColaboradorControllerTest {
 
         verify(colaboradorRepository, times(1)).save(colaborador1);
     }
+
 
 }
