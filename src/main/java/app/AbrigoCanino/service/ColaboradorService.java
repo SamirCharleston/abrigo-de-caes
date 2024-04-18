@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ColaboradorService {
@@ -20,13 +21,16 @@ public class ColaboradorService {
         colaboradorRepository.save(colaborador);
         return MensagensDeSucesso.CADASTRO_SUCESSO;
     }
-    public ColaboradorEntity findById(Long id) throws Exception{
-        if(!colaboradorRepository.existsById(id)){
+
+    public ColaboradorEntity findById(Long id) throws Exception {
+        Optional<ColaboradorEntity> colaboradorOptional = colaboradorRepository.findById(id);
+        if (colaboradorOptional.isPresent()) {
+            return colaboradorOptional.get();
+        } else {
             throw new Exception(MensagensDeErro.ID_NAO_ENCONTRADO);
         }
-
-        return colaboradorRepository.findById(id).get();
     }
+
     public List<ColaboradorEntity> findAll() throws Exception{
         if(colaboradorRepository.findAll().isEmpty()){
             throw new Exception(MensagensDeErro.ID_NAO_ENCONTRADO);

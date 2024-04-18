@@ -28,7 +28,7 @@ public class ColaboradorController {
         }
     }
     @GetMapping(EnderecoEndPoint.BUSCAR_ID)
-    public ResponseEntity<ObjetoResposta<ColaboradorEntity>> findById(@RequestParam Long id){
+    public ResponseEntity<ObjetoResposta<ColaboradorEntity>> findById(@PathVariable Long id){
         ObjetoResposta<ColaboradorEntity> resposta = new ObjetoResposta<>();
         try{
             resposta.setObjeto(colaboradorService.findById(id));

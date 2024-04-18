@@ -7,6 +7,7 @@ import app.AbrigoCanino.repositories.TutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -22,14 +23,18 @@ public class TutorService {
         return MensagensDeSucesso.CADASTRO_SUCESSO;
     }
 
+
+
     public TutorEntity findById(Long id) throws Exception {
         return tutorRepository.findById(id).orElseThrow(() -> new Exception(MensagensDeErro.ID_NAO_ENCONTRADO));
     }
 
-    public List<TutorEntity> findAll() throws Exception {
-        if(tutorRepository.findAll().isEmpty())
-            throw new Exception(MensagensDeErro.LISTA_VAZIA);
-        return tutorRepository.findAll();
+    public List<TutorEntity> findAll() {
+        List<TutorEntity> tutores = tutorRepository.findAll();
+        if (tutores.isEmpty()) {
+            return Collections.emptyList(); // Retorna uma lista vazia se não houver tutores
+        }
+        return tutores;
     }
 
     public String update(TutorEntity tutor) {
@@ -37,11 +42,11 @@ public class TutorService {
         return MensagensDeSucesso.ALTERACAO_SUCESSO;
     }
 
-    public String delete(Long id) throws Exception{
+    public String delete(Long id) {
         if(!tutorRepository.existsById(id)){
-            throw new Exception(MensagensDeErro.ID_NAO_ENCONTRADO);
+            return MensagensDeErro.ID_NAO_ENCONTRADO;
         }
-        tutorRepository.delete(findById(id));
+        tutorRepository.deleteById(id);
         return MensagensDeSucesso.EXCLUSAO_SUCESSO;
     }
     public boolean verificaMaioridade(int idade){

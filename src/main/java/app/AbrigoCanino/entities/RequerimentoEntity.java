@@ -17,7 +17,6 @@ public class RequerimentoEntity extends AbstractEntity {
     @NotNull(message = "O tutor nao deve ser nulo")
     @ManyToOne
     private TutorEntity autorDoRequerimento;
-    @NotNull(message = "A lista de caes nao deve ser nula")
     @ManyToMany
     private List<CachorroEntity> caesRequeridos;
 }
