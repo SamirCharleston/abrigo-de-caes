@@ -14,13 +14,18 @@ public class ColaboradorService {
     @Autowired
     private ColaboradorRepository colaboradorRepository;
     public String save(ColaboradorEntity colaborador) throws Exception{
+        if(colaborador == null){
+            throw new Exception(MensagensDeErro.OBJETO_NULO);
+        }
         colaboradorRepository.save(colaborador);
         return MensagensDeSucesso.CADASTRO_SUCESSO;
     }
     public ColaboradorEntity findById(Long id) throws Exception{
-        return colaboradorRepository.findById(id).orElseThrow(
-                () -> new Exception(MensagensDeErro.ID_NAO_ENCONTRADO)
-        );
+        if(!colaboradorRepository.existsById(id)){
+            throw new Exception(MensagensDeErro.ID_NAO_ENCONTRADO);
+        }
+
+        return colaboradorRepository.findById(id).get();
     }
     public List<ColaboradorEntity> findAll() throws Exception{
         if(colaboradorRepository.findAll().isEmpty()){
