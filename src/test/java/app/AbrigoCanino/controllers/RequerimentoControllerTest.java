@@ -1,6 +1,7 @@
 package app.AbrigoCanino.controllers;
 
 
+import app.AbrigoCanino.configuracoes.MensagensDeErro;
 import app.AbrigoCanino.configuracoes.MensagensDeSucesso;
 import app.AbrigoCanino.configuracoes.ObjetoResposta;
 import app.AbrigoCanino.entities.CachorroEntity;
@@ -21,8 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
@@ -75,13 +75,56 @@ class RequerimentoControllerTest {
     }
 
 
-    /*@Test
-    void save_RequerimentoValido_DeveRetornarStatusOk() {
+    @Test
+    void save_RequerimentoInvalido_DeveRetornarErro() {
         ResponseEntity<ObjetoResposta<Void>> response = requerimentoController.save(requerimento1);
 
         assertNotNull(response.getBody());
-        assertEquals(MensagensDeSucesso.CADASTRO_SUCESSO, response.getBody().getMensagem());
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-    }*/
+        assertEquals("Autor nao encontrado", response.getBody().getMensagem());
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+    }
+    @Test
+    void findById_Requerimento_DeveRetornarErro(){
+        ResponseEntity<ObjetoResposta<RequerimentoEntity>> response = requerimentoController.findById(2L);
 
+        assertNotNull(response.getBody());
+        assertEquals(MensagensDeErro.ID_NAO_ENCONTRADO, response.getBody().getMensagem());
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+    }
+    @Test
+    void findAll_Requerimento_DeveRetornarLista(){
+        ResponseEntity<ObjetoResposta<List<RequerimentoEntity>>> response = requerimentoController.findAll();
+
+        assertNotNull(response.getBody());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(1, response.getBody().getObjeto().size());
+    }
+    @Test
+    void update_Requerimento_DeveRetornarSucesso(){
+        ResponseEntity<ObjetoResposta<Void>> response = requerimentoController.update(requerimento1);
+
+        assertNotNull(response.getBody());
+        assertEquals(MensagensDeSucesso.ALTERACAO_SUCESSO, response.getBody().getMensagem());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
+    void deleteById_Requerimento_DeveRetornarErro(){
+        ResponseEntity<ObjetoResposta<Void>> response = requerimentoController.delete(2L);
+
+        assertNotNull(response.getBody());
+        assertEquals(MensagensDeErro.ID_NAO_ENCONTRADO, response.getBody().getMensagem());
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+        assertThrows(Exception.class, () -> {
+            requerimentoService.delete(10L);
+        });
+    }
+    @Test
+    void delete_Requerimento_DeveRetornarSucesso(){
+        ResponseEntity<ObjetoResposta<Void>> response = requerimentoController.delete(1L);
+
+        assertNotNull(response.getBody());
+        assertEquals(MensagensDeSucesso.EXCLUSAO_SUCESSO, response.getBody().getMensagem());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
 }

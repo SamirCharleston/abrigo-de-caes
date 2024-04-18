@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ColaboradorController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AbrigoCanino</a> &gt; <a href="index.source.html" class="el_package">app.AbrigoCanino.controllers</a> &gt; <span class="el_source">ColaboradorController.java</span></div><h1>ColaboradorController.java</h1><pre class="source lang-java linenums">package app.AbrigoCanino.controllers;
+
+import app.AbrigoCanino.configuracoes.EnderecoEndPoint;
+import app.AbrigoCanino.configuracoes.MensagensDeSucesso;
+import app.AbrigoCanino.configuracoes.ObjetoResposta;
+import app.AbrigoCanino.entities.ColaboradorEntity;
+import app.AbrigoCanino.service.ColaboradorService;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping(value = &quot;api/colaborador&quot;)
+<span class="fc" id="L17">public class ColaboradorController {</span>
+    @Autowired
+    private ColaboradorService colaboradorService;
+    @PostMapping(EnderecoEndPoint.CADASTRAR)
+    public ResponseEntity&lt;ObjetoResposta&lt;Void&gt;&gt; save(@RequestBody @Valid ColaboradorEntity colaborador){
+<span class="fc" id="L22">        ObjetoResposta&lt;Void&gt; resposta = new ObjetoResposta&lt;&gt;();</span>
+        try{
+<span class="fc" id="L24">            resposta.setMensagem(colaboradorService.save(colaborador));</span>
+<span class="fc" id="L25">            return ResponseEntity.ok(resposta);</span>
+<span class="fc" id="L26">        } catch (Exception e){</span>
+<span class="fc" id="L27">            resposta.setMensagem(e.getMessage());</span>
+<span class="fc" id="L28">            return ResponseEntity.badRequest().body(resposta);</span>
+        }
+    }
+    @GetMapping(EnderecoEndPoint.BUSCAR_ID)
+    public ResponseEntity&lt;ObjetoResposta&lt;ColaboradorEntity&gt;&gt; findById(@PathVariable Long id){
+<span class="fc" id="L33">        ObjetoResposta&lt;ColaboradorEntity&gt; resposta = new ObjetoResposta&lt;&gt;();</span>
+        try{
+<span class="fc" id="L35">            resposta.setObjeto(colaboradorService.findById(id));</span>
+<span class="fc" id="L36">            return ResponseEntity.ok(resposta);</span>
+<span class="fc" id="L37">        } catch (Exception e){</span>
+<span class="fc" id="L38">            resposta.setMensagem(e.getMessage());</span>
+<span class="fc" id="L39">            return ResponseEntity.badRequest().body(resposta);</span>
+        }
+    }
+    @GetMapping(EnderecoEndPoint.LISTAR)
+    public ResponseEntity&lt;ObjetoResposta&lt;List&lt;ColaboradorEntity&gt;&gt;&gt; findAll(){
+<span class="fc" id="L44">        ObjetoResposta&lt;List&lt;ColaboradorEntity&gt;&gt; resposta = new ObjetoResposta&lt;&gt;();</span>
+        try{
+<span class="fc" id="L46">            resposta.setObjeto(colaboradorService.findAll());</span>
+<span class="fc" id="L47">            return ResponseEntity.ok(resposta);</span>
+<span class="nc" id="L48">        } catch (Exception e){</span>
+<span class="nc" id="L49">            resposta.setMensagem(e.getMessage());</span>
+<span class="nc" id="L50">            return ResponseEntity.badRequest().body(resposta);</span>
+        }
+    }
+    @PutMapping(EnderecoEndPoint.ATUALIZAR)
+    public ResponseEntity&lt;ObjetoResposta&lt;Void&gt;&gt; update(@RequestBody @Valid ColaboradorEntity colaborador){
+<span class="fc" id="L55">        ObjetoResposta&lt;Void&gt; resposta = new ObjetoResposta&lt;&gt;();</span>
+        try{
+<span class="fc" id="L57">            resposta.setMensagem(colaboradorService.update(colaborador));</span>
+<span class="fc" id="L58">            return ResponseEntity.ok(resposta);</span>
+<span class="nc" id="L59">        } catch (Exception e){</span>
+<span class="nc" id="L60">            resposta.setMensagem(e.getMessage());</span>
+<span class="nc" id="L61">            return ResponseEntity.badRequest().body(resposta);</span>
+        }
+    }
+    @DeleteMapping(&quot;/colaborador&quot;)
+    public ResponseEntity&lt;ObjetoResposta&lt;Void&gt;&gt; delete(@RequestParam(&quot;id&quot;) Long id) {
+<span class="fc" id="L66">        ObjetoResposta&lt;Void&gt; resposta = new ObjetoResposta&lt;&gt;();</span>
+        try {
+<span class="fc" id="L68">            String mensagem = colaboradorService.delete(id);</span>
+<span class="fc" id="L69">            resposta.setMensagem(mensagem);</span>
+<span class="fc" id="L70">            return ResponseEntity.ok(resposta);</span>
+<span class="nc" id="L71">        } catch (Exception e) {</span>
+<span class="nc" id="L72">            resposta.setMensagem(e.getMessage());</span>
+<span class="nc" id="L73">            return ResponseEntity.badRequest().body(resposta);</span>
+        }
+    }
+    }
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

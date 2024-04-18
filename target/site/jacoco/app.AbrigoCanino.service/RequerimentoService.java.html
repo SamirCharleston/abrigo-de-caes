@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RequerimentoService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AbrigoCanino</a> &gt; <a href="index.source.html" class="el_package">app.AbrigoCanino.service</a> &gt; <span class="el_source">RequerimentoService.java</span></div><h1>RequerimentoService.java</h1><pre class="source lang-java linenums">package app.AbrigoCanino.service;
+
+import app.AbrigoCanino.configuracoes.MensagensDeErro;
+import app.AbrigoCanino.configuracoes.MensagensDeSucesso;
+import app.AbrigoCanino.entities.CachorroEntity;
+import app.AbrigoCanino.entities.RequerimentoEntity;
+import app.AbrigoCanino.entities.TutorEntity;
+import app.AbrigoCanino.repositories.CachorroRepository;
+import app.AbrigoCanino.repositories.RequerimentoRepository;
+import app.AbrigoCanino.repositories.TutorRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+<span class="fc" id="L17">public class RequerimentoService {</span>
+    @Autowired
+    private RequerimentoRepository requerimentoRepository;
+    @Autowired
+    TutorRepository tutorRepository;
+    @Autowired
+    private CachorroRepository cachorroRepository;
+    public String save(RequerimentoEntity requerimento) throws Exception {
+
+<span class="pc bpc" id="L26" title="1 of 2 branches missed.">        if(requerimento.getAutorDoRequerimento().getId() == null){</span>
+<span class="nc" id="L27">            throw new Exception(&quot;Autor nao pode ser nulo&quot;);</span>
+        }
+<span class="fc" id="L29">        TutorEntity tutor = tutorRepository</span>
+<span class="fc" id="L30">                .findById(requerimento.getAutorDoRequerimento().getId())</span>
+<span class="pc" id="L31">                .orElseThrow(() -&gt; new Exception(&quot;Autor nao encontrado&quot;));</span>
+
+<span class="nc bnc" id="L33" title="All 2 branches missed.">        if(requerimento.getCaesRequeridos().isEmpty()){</span>
+<span class="nc" id="L34">            throw new Exception(&quot;A lista de caes nao pode ser vazia&quot;);</span>
+        }
+
+<span class="nc bnc" id="L37" title="All 2 branches missed.">        for(CachorroEntity c : requerimento.getCaesRequeridos()){</span>
+<span class="nc bnc" id="L38" title="All 2 branches missed.">            if(c.getId() == null){</span>
+<span class="nc" id="L39">                throw new Exception(&quot;O cachorro nao pode ser nulo&quot;);</span>
+            }
+<span class="nc" id="L41">            cachorroRepository</span>
+<span class="nc" id="L42">                    .findById(c.getId())</span>
+<span class="nc" id="L43">                    .orElseThrow(() -&gt; new Exception(&quot;O cachorro &quot; + c.getNome() + &quot;  nao pode ser encontrado&quot;));</span>
+<span class="nc" id="L44">        };</span>
+
+<span class="nc" id="L46">        requerimentoRepository.save(requerimento);</span>
+<span class="nc" id="L47">        return MensagensDeSucesso.CADASTRO_SUCESSO;</span>
+    }
+
+    public RequerimentoEntity findById(Long id) throws Exception {
+<span class="fc" id="L51">        return requerimentoRepository.findById(id).orElseThrow(() -&gt; new Exception(MensagensDeErro.ID_NAO_ENCONTRADO));</span>
+    }
+
+    public List&lt;RequerimentoEntity&gt; findAll() throws Exception {
+<span class="pc bpc" id="L55" title="1 of 2 branches missed.">        if(requerimentoRepository.findAll().isEmpty())</span>
+<span class="nc" id="L56">            throw new Exception(MensagensDeErro.LISTA_VAZIA);</span>
+<span class="fc" id="L57">        return requerimentoRepository.findAll();</span>
+    }
+
+    public String update(RequerimentoEntity requerimento) throws Exception {
+<span class="fc" id="L61">        RequerimentoEntity requerimentoExistente = requerimentoRepository.findById(requerimento.getId())</span>
+<span class="pc" id="L62">                .orElseThrow(() -&gt; new Exception(MensagensDeErro.ID_NAO_ENCONTRADO));</span>
+<span class="fc" id="L63">        requerimentoRepository.save(requerimentoExistente);</span>
+<span class="fc" id="L64">        return MensagensDeSucesso.ALTERACAO_SUCESSO;</span>
+    }
+
+    public String delete(Long id) throws Exception{
+<span class="fc bfc" id="L68" title="All 2 branches covered.">        if(!requerimentoRepository.existsById(id)){</span>
+<span class="fc" id="L69">            throw new Exception(MensagensDeErro.ID_NAO_ENCONTRADO);</span>
+        }
+<span class="fc" id="L71">        requerimentoRepository.delete(findById(id));</span>
+<span class="fc" id="L72">        return MensagensDeSucesso.EXCLUSAO_SUCESSO;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

@@ -1,10 +1,12 @@
 package app.AbrigoCanino.configuracoes;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 // Classe de teste para EnderecoEndPoint
+@SpringBootTest
 public class EnderecoEndPointTest {
 
     // Teste para verificar os endpoints da classe EnderecoEndPoint

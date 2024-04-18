@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TutorService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AbrigoCanino</a> &gt; <a href="index.source.html" class="el_package">app.AbrigoCanino.service</a> &gt; <span class="el_source">TutorService.java</span></div><h1>TutorService.java</h1><pre class="source lang-java linenums">package app.AbrigoCanino.service;
+
+import app.AbrigoCanino.configuracoes.MensagensDeErro;
+import app.AbrigoCanino.configuracoes.MensagensDeSucesso;
+import app.AbrigoCanino.entities.TutorEntity;
+import app.AbrigoCanino.repositories.TutorRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Collections;
+import java.util.List;
+
+@Service
+<span class="fc" id="L14">public class TutorService {</span>
+    @Autowired
+    private TutorRepository tutorRepository;
+
+    public String save(TutorEntity tutor) throws Exception {
+<span class="pc bpc" id="L19" title="1 of 2 branches missed.">        if(!verificaMaioridade(tutor.getIdade())){</span>
+<span class="nc" id="L20">            throw new Exception(&quot;Tutor nao deve ser menor de idade.&quot;);</span>
+        }
+<span class="fc" id="L22">        tutorRepository.save(tutor);</span>
+<span class="fc" id="L23">        return MensagensDeSucesso.CADASTRO_SUCESSO;</span>
+    }
+
+
+
+    public TutorEntity findById(Long id) throws Exception {
+<span class="fc" id="L29">        return tutorRepository.findById(id).orElseThrow(() -&gt; new Exception(MensagensDeErro.ID_NAO_ENCONTRADO));</span>
+    }
+
+    public List&lt;TutorEntity&gt; findAll() {
+<span class="fc" id="L33">        List&lt;TutorEntity&gt; tutores = tutorRepository.findAll();</span>
+<span class="pc bpc" id="L34" title="1 of 2 branches missed.">        if (tutores.isEmpty()) {</span>
+<span class="nc" id="L35">            return Collections.emptyList(); // Retorna uma lista vazia se não houver tutores</span>
+        }
+<span class="fc" id="L37">        return tutores;</span>
+    }
+
+    public String update(TutorEntity tutor) {
+<span class="fc" id="L41">        tutorRepository.save(tutor);</span>
+<span class="fc" id="L42">        return MensagensDeSucesso.ALTERACAO_SUCESSO;</span>
+    }
+
+    public String delete(Long id) {
+<span class="pc bpc" id="L46" title="1 of 2 branches missed.">        if(!tutorRepository.existsById(id)){</span>
+<span class="nc" id="L47">            return MensagensDeErro.ID_NAO_ENCONTRADO;</span>
+        }
+<span class="fc" id="L49">        tutorRepository.deleteById(id);</span>
+<span class="fc" id="L50">        return MensagensDeSucesso.EXCLUSAO_SUCESSO;</span>
+    }
+    public boolean verificaMaioridade(int idade){
+<span class="fc bfc" id="L53" title="All 2 branches covered.">        return idade &gt;= 18;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
