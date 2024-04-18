@@ -11,22 +11,25 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-<span class="pc bpc" id="L14" title="39 of 40 branches missed.">@Data</span>
+@Getter
+<span class="pc" id="L15">@Setter</span>
+<span class="nc" id="L16">@AllArgsConstructor</span>
+<span class="fc" id="L17">@NoArgsConstructor</span>
 @Table(name = &quot;tutores&quot;, schema = &quot;public&quot;)
 public class TutorEntity extends PessoaEntity{
     @Column
-<span class="nc" id="L18">    private LocalDate dataRequerimento;</span>
+<span class="fc" id="L21">    private LocalDate dataRequerimento;</span>
     @Column(nullable = false)
-<span class="nc" id="L20">    private String contato;</span>
+<span class="fc" id="L23">    private String contato;</span>
     @NotBlank
     @Column(nullable = false)
-<span class="fc" id="L23">    private int idade;</span>
+<span class="fc" id="L26">    private int idade;</span>
     @NotBlank(message = &quot;O endereco nao pode ser em branco&quot;)
     @NotNull(message = &quot;O endereco nao pode ser nulo&quot;)
     @Column
-<span class="nc" id="L27">    private String endereco;</span>
+<span class="nc" id="L30">    private String endereco;</span>
     @OneToMany
     @JsonIgnore
-<span class="nc" id="L30">    private List&lt;RequerimentoEntity&gt; requerimentos;</span>
+<span class="nc" id="L33">    private List&lt;RequerimentoEntity&gt; requerimentos;</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

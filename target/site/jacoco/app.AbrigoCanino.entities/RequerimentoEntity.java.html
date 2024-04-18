@@ -5,19 +5,20 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 @Entity
-<span class="pc bnc" id="L14" title="All 22 branches missed.">@Data</span>
+@Getter
+<span class="fc" id="L13">@Setter</span>
+<span class="nc" id="L14">@AllArgsConstructor</span>
+<span class="fc" id="L15">@NoArgsConstructor</span>
 @Table(name = &quot;requerimentos&quot;, schema = &quot;public&quot;)
 public class RequerimentoEntity extends AbstractEntity {
     @NotNull(message = &quot;O tutor nao deve ser nulo&quot;)
     @ManyToOne
-<span class="fc" id="L19">    private TutorEntity autorDoRequerimento;</span>
+<span class="fc" id="L20">    private TutorEntity autorDoRequerimento;</span>
     @ManyToMany
-<span class="nc" id="L21">    private List&lt;CachorroEntity&gt; caesRequeridos;</span>
+<span class="nc" id="L22">    private List&lt;CachorroEntity&gt; caesRequeridos;</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

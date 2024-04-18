@@ -4,7 +4,10 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "colaboradores", schema = "public")
 public class ColaboradorEntity extends PessoaEntity{
     @Column(nullable = false)

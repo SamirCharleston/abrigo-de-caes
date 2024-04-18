@@ -11,7 +11,10 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "tutores", schema = "public")
 public class TutorEntity extends PessoaEntity{
     @Column

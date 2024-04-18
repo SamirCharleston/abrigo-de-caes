@@ -36,6 +36,7 @@ public class TutorServiceTest {
     public void setUp() {
         TutorEntity tutor = new TutorEntity();
 
+        tutor.setStatus(true);
         tutor.setId(1L);
         tutor.setNome("Samir");
         tutor.setIdade(18);

@@ -48,6 +48,7 @@ class TutorControllerTest {
         List<TutorEntity> tutoreslista = new ArrayList<>();
 
         tutor.setId(1L);
+        tutor.setStatus(true);
         tutor.setDataRequerimento(LocalDate.now());
         tutor.setContato("123");
         tutor.setIdade(20);
@@ -77,12 +78,39 @@ class TutorControllerTest {
     }
 
     @Test
+    void save_TutorMenorIdade_DeveLancarExcessao() {
+        tutor1.setIdade(17);
+        ResponseEntity<ObjetoResposta<Void>> response = tutorController.save(tutor1);
+        // Assert: Verificação dos resultados da ação
+        // Verificar se o status HTTP retornado é OK (200)
+        assertNotNull(response.getBody());
+        assertEquals("Tutor nao deve ser menor de idade.", response.getBody().getMensagem());
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+        assertThrows(Exception.class, () -> {
+            tutorService.save(tutor1);
+        });
+    }
+    @Test
+    void save_TutorContatoEmBranco_DeveLancarExcessao(){
+        tutor1.setContato("");
+        ResponseEntity<ObjetoResposta<Void>> response = tutorController.save(tutor1);
+        // Assert: Verificação dos resultados da ação
+        // Verificar se o status HTTP retornado é OK (200)
+        assertNotNull(response.getBody());
+        assertEquals("Contato nao deve ser em branco", response.getBody().getMensagem());
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+        assertThrows(Exception.class, () -> {
+            tutorService.save(tutor1);
+        });
+    }
+
+    @Test
     void save_TutorNulo_DeveLancarExcessao(){
         ResponseEntity<ObjetoResposta<Void>> response = tutorController.save(null);
 
         assertNotNull(response.getBody());
         assertThrows(Exception.class, () -> {
-            throw new Exception(MensagensDeErro.OBJETO_NULO);
+            tutorService.save(null);
         });
     }
 

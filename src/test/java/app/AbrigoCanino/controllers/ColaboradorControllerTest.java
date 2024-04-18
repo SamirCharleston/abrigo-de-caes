@@ -83,7 +83,7 @@ public class ColaboradorControllerTest {
 
         assertNotNull(response.getBody());
         assertThrows(Exception.class, () -> {
-            throw new Exception(MensagensDeErro.OBJETO_NULO);
+            colaboradorService.save(null);
         });
     }
 

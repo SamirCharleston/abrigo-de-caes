@@ -85,7 +85,7 @@ public class CachorroControllerTest {
 
         assertNotNull(response.getBody());
         assertThrows(Exception.class, () -> {
-            throw new Exception(MensagensDeErro.OBJETO_NULO);
+            cachorroService.findById(null);
         });
     }
 
@@ -139,13 +139,11 @@ public class CachorroControllerTest {
     void update_CachorroExistente_DeveRetornarStatusOk() {
         ResponseEntity<ObjetoResposta<Void>> response = cachorroController.update(cachorro1);
 
-
         assertNotNull(response.getBody());
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(MensagensDeSucesso.ALTERACAO_SUCESSO, response.getBody().getMensagem());
 
-
         verify(cachorroRepository, times(1)).save(cachorro1);
     }
 
-    }
+}

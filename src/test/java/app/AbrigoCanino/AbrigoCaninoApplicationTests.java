@@ -10,5 +10,8 @@ class AbrigoCaninoApplicationTests {
 
     @Test
     void main_StartApplication_NoExceptions() {
+        assertDoesNotThrow(() -> {
+            AbrigoCaninoApplication.main(new String[0]);
+        });
     }
 }

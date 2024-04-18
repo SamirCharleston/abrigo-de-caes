@@ -7,6 +7,7 @@ import app.AbrigoCanino.repositories.TutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 
@@ -19,6 +20,15 @@ public class TutorService {
         if(!verificaMaioridade(tutor.getIdade())){
             throw new Exception("Tutor nao deve ser menor de idade.");
         }
+        if(tutor.getContato().isBlank()){
+            throw new Exception("Contato nao deve ser em branco");
+        }
+        if(tutor.getDataRequerimento().isBefore(LocalDate.now()))
+            throw new Exception("Data de requerimento nao pode ser anterior a data atual");
+
+        if(!tutor.isStatus())
+            throw new Exception("Este tutor esta inativo");
+
         tutorRepository.save(tutor);
         return MensagensDeSucesso.CADASTRO_SUCESSO;
     }
