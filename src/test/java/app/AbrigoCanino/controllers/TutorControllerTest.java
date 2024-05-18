@@ -4,7 +4,6 @@ package app.AbrigoCanino.controllers;
 import app.AbrigoCanino.configuracoes.MensagensDeErro;
 import app.AbrigoCanino.configuracoes.MensagensDeSucesso;
 import app.AbrigoCanino.configuracoes.ObjetoResposta;
-import app.AbrigoCanino.entities.ColaboradorEntity;
 import app.AbrigoCanino.entities.TutorEntity;
 import app.AbrigoCanino.repositories.TutorRepository;
 import app.AbrigoCanino.service.TutorService;
@@ -18,7 +17,6 @@ import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 

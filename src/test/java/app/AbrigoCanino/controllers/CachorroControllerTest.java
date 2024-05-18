@@ -4,7 +4,6 @@ import app.AbrigoCanino.configuracoes.MensagensDeErro;
 import app.AbrigoCanino.configuracoes.MensagensDeSucesso;
 import app.AbrigoCanino.configuracoes.ObjetoResposta;
 import app.AbrigoCanino.entities.CachorroEntity;
-import app.AbrigoCanino.entities.ColaboradorEntity;
 import app.AbrigoCanino.repositories.CachorroRepository;
 import app.AbrigoCanino.service.CachorroService;
 import org.junit.jupiter.api.BeforeEach;

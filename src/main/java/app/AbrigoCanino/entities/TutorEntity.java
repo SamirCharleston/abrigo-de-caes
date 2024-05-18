@@ -18,6 +18,8 @@ import java.util.List;
 @Table(name = "tutores", schema = "public")
 public class TutorEntity extends PessoaEntity{
     @Column
+    private String nome;
+    @Column
     private LocalDate dataRequerimento;
     @Column(nullable = false)
     private String contato;

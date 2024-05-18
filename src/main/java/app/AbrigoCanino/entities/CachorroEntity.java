@@ -37,27 +37,12 @@ public class CachorroEntity extends AbstractEntity {
     private int idadeAproximada;
 
     @Column(nullable = false)
-    @NotNull(message = "A descrição do cachorro não pode estar em branco")
-    private boolean possuiDeficiencia;
-
-    @Column(nullable = false)
-    private String descricaoDaDeficiencia;
-
-    @Column(nullable = false)
-    private String observacaoDoAnimal;
-
-    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Porte porte;
 
-    @Column(nullable = false)
+    @Column
     private LocalDate dataDeAdocao;
-
-    @Column(nullable = false)
-    private LocalDate dataDeChegadaAoAbrigo;
-
     @Column(nullable = false)
     @NotBlank(message = "A descrição do cachorro não pode estar em branco")
     private String descricao;
-
 }
