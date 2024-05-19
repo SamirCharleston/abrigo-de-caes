@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "api/requerimento")
+@CrossOrigin("*")
 public class RequerimentoController {
     @Autowired
     private RequerimentoService requerimentoService;

@@ -54,7 +54,6 @@ public class CachorroControllerTest {
         cachorro.setNome("Joao");
         cachorro.setRaca("Pitbull");
         cachorro.setIdadeAproximada(10);
-        cachorro.setPossuiDeficiencia(true);
         cachorro.setDescricao("Descricao");
 
 

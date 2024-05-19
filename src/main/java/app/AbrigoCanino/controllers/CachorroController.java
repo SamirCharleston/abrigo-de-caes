@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "api/cachorro")
+@CrossOrigin("*")
 public class CachorroController {
 
     @Autowired
