@@ -5,7 +5,9 @@ import app.AbrigoCanino.configuracoes.MensagensDeSucesso;
 import app.AbrigoCanino.entities.TutorEntity;
 import app.AbrigoCanino.repositories.TutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.Collections;
@@ -16,6 +18,7 @@ public class TutorService {
     @Autowired
     private TutorRepository tutorRepository;
 
+    @Transactional
     public String save(TutorEntity tutor) throws Exception {
         if(!verificaMaioridade(tutor.getIdade())){
             throw new Exception("Tutor nao deve ser menor de idade.");
@@ -23,11 +26,13 @@ public class TutorService {
         if(tutor.getContato().isBlank()){
             throw new Exception("Contato nao deve ser em branco");
         }
-        if(tutor.getDataRequerimento().isBefore(LocalDate.now()))
+        if(tutor.getDataRequerimento().isBefore(LocalDate.now())){
             throw new Exception("Data de requerimento nao pode ser anterior a data atual");
-
-        if(!tutor.isStatus())
-            throw new Exception("Este tutor esta inativo");
+        }
+        if(tutorRepository.existsByNome(tutor.getNome())){
+            throw new DataIntegrityViolationException("Este tutor ja esta cadastrado");
+        }
+        tutor.setId(null);
 
         tutorRepository.save(tutor);
         return MensagensDeSucesso.CADASTRO_SUCESSO;

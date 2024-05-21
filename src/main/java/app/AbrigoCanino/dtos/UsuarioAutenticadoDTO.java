@@ -10,5 +10,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UsuarioAutenticadoDTO {
+    private String nome;
     private String codigo;
 }
