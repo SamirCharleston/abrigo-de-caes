@@ -31,7 +31,7 @@ public class CachorroService {
         if(cachorroRepository.findAll().isEmpty()){
             throw new Exception(MensagensDeErro.ID_NAO_ENCONTRADO);
         }
-        return cachorroRepository.findAll();
+        return cachorroRepository.findByStatus(true);
     }
     public String update(CachorroEntity cachorro) throws Exception{
         cachorroRepository.save(cachorro);

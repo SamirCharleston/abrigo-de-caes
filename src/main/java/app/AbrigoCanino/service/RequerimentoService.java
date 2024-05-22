@@ -8,8 +8,10 @@ import app.AbrigoCanino.entities.TutorEntity;
 import app.AbrigoCanino.repositories.CachorroRepository;
 import app.AbrigoCanino.repositories.RequerimentoRepository;
 import app.AbrigoCanino.repositories.TutorRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,14 +24,18 @@ public class RequerimentoService {
     TutorRepository tutorRepository;
     @Autowired
     private CachorroRepository cachorroRepository;
+    @Transactional
     public String save(RequerimentoEntity requerimento) throws Exception {
 
         if(requerimento.getAutorDoRequerimento() == null){
             throw new Exception("Autor nao pode ser nulo");
         }
+        //Verifica se o tutor existe
+        if(!tutorRepository.existsById(requerimento.getAutorDoRequerimento().getId())){
+            throw new Exception("Autor nao encontrado");
+        }
         TutorEntity tutor = tutorRepository
-                .getReferenceByNome(requerimento.getAutorDoRequerimento().getNome())
-                .orElseThrow(() -> new Exception("Autor nao encontrado"));
+                .getReferenceById(requerimento.getAutorDoRequerimento().getId());
 
         if(requerimento.getCaesRequeridos().isEmpty()){
             throw new Exception("A lista de caes nao pode ser vazia");
@@ -37,13 +43,16 @@ public class RequerimentoService {
 
         List<CachorroEntity> cachorroEntities = new ArrayList<CachorroEntity>();
         for(CachorroEntity c : requerimento.getCaesRequeridos()){
-            if(c.getNome() == null){
-                throw new Exception("O nome do cachorro nao pode ser nulo");
+            if(!cachorroRepository.existsById(c.getId())){
+                throw new EntityNotFoundException("O cachorro nao pode ser encontrado");
             }
-            cachorroEntities.add(cachorroRepository
-                    .getReferenceByNome(c.getNome())
-                    .orElseThrow(() -> new Exception("O cachorro " + c.getNome() + "  nao pode ser encontrado"))
-            );
+
+            //Seta o estado do cachorro para false para que nao possa mais ser retornado para o listAll
+            //Assim esse cachorro nao pode ser adotado mais de uma vez
+            CachorroEntity cachorro = cachorroRepository.getReferenceById(c.getId());
+            cachorro.setStatus(false);
+
+            cachorroEntities.add(cachorro);
         };
 
         requerimento.setAutorDoRequerimento(tutor);
