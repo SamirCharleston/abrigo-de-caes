@@ -11,6 +11,7 @@ import app.AbrigoCanino.repositories.TutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,25 +24,30 @@ public class RequerimentoService {
     private CachorroRepository cachorroRepository;
     public String save(RequerimentoEntity requerimento) throws Exception {
 
-        if(requerimento.getAutorDoRequerimento().getId() == null){
+        if(requerimento.getAutorDoRequerimento() == null){
             throw new Exception("Autor nao pode ser nulo");
         }
         TutorEntity tutor = tutorRepository
-                .findById(requerimento.getAutorDoRequerimento().getId())
+                .getReferenceByNome(requerimento.getAutorDoRequerimento().getNome())
                 .orElseThrow(() -> new Exception("Autor nao encontrado"));
 
         if(requerimento.getCaesRequeridos().isEmpty()){
             throw new Exception("A lista de caes nao pode ser vazia");
         }
 
+        List<CachorroEntity> cachorroEntities = new ArrayList<CachorroEntity>();
         for(CachorroEntity c : requerimento.getCaesRequeridos()){
-            if(c.getId() == null){
-                throw new Exception("O cachorro nao pode ser nulo");
+            if(c.getNome() == null){
+                throw new Exception("O nome do cachorro nao pode ser nulo");
             }
-            cachorroRepository
-                    .findById(c.getId())
-                    .orElseThrow(() -> new Exception("O cachorro " + c.getNome() + "  nao pode ser encontrado"));
+            cachorroEntities.add(cachorroRepository
+                    .getReferenceByNome(c.getNome())
+                    .orElseThrow(() -> new Exception("O cachorro " + c.getNome() + "  nao pode ser encontrado"))
+            );
         };
+
+        requerimento.setAutorDoRequerimento(tutor);
+        requerimento.setCaesRequeridos(cachorroEntities);
 
         requerimentoRepository.save(requerimento);
         return MensagensDeSucesso.CADASTRO_SUCESSO;

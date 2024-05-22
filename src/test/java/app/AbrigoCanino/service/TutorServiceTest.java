@@ -40,8 +40,6 @@ public class TutorServiceTest {
         tutor.setId(1L);
         tutor.setNome("Samir");
         tutor.setIdade(18);
-        tutor.setRg("2151511");
-        tutor.setCpf("12345678901");
         tutor.setContato("12345678901");
         tutor.setDataRequerimento(LocalDate.now());
         tutor.setEndereco("Rua ABC");

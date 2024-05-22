@@ -3,7 +3,8 @@ package app.AbrigoCanino.repositories;
 import app.AbrigoCanino.entities.CachorroEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CachorroRepository  extends JpaRepository<CachorroEntity, Long> {
+import java.util.Optional;
 
-    
+public interface CachorroRepository  extends JpaRepository<CachorroEntity, Long> {
+    Optional<CachorroEntity> getReferenceByNome(String nome);
 }

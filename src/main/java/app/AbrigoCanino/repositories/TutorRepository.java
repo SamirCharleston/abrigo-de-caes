@@ -5,6 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.bind.annotation.RequestParam;
 
-public interface TutorRepository extends JpaRepository<TutorEntity, Long> {
+import java.util.Optional;
 
+public interface TutorRepository extends JpaRepository<TutorEntity, Long> {
+    Optional<TutorEntity> getReferenceByNome(String nome);
+    boolean existsByNome(String nome);
 }

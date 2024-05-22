@@ -31,8 +31,10 @@ public class UsuarioService {
 
         UsuarioAutenticadoDTO usuarioAutenticado = new UsuarioAutenticadoDTO();
 
-        //Simula o retorno de uma informacao de sessao
-        usuarioAutenticado.setCodigo(usuario.getNome() + usuario.getSenha());
+        //Converte o nome para uma hash simples para realizar a simulacao de
+        //operacao bem sucedida
+        usuarioAutenticado.setCodigo(UUID.nameUUIDFromBytes(usuario.getNome().getBytes()).toString());
+        usuarioAutenticado.setNome(usuario.getNome());
 
         return usuarioAutenticado;
     }
