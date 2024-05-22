@@ -26,9 +26,6 @@ public class TutorService {
         if(tutor.getContato().isBlank()){
             throw new Exception("Contato nao deve ser em branco");
         }
-        if(tutor.getDataRequerimento().isBefore(LocalDate.now())){
-            throw new Exception("Data de requerimento nao pode ser anterior a data atual");
-        }
         if(tutorRepository.existsByNome(tutor.getNome())){
             throw new DataIntegrityViolationException("Este tutor ja esta cadastrado");
         }

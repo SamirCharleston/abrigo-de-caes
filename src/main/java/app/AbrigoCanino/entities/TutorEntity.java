@@ -19,8 +19,6 @@ import java.util.List;
 public class TutorEntity extends AbstractEntity{
     @Column
     private String nome;
-    @Column
-    private LocalDate dataRequerimento;
     @Column(nullable = false)
     private String contato;
     @Column
