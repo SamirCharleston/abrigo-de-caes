@@ -49,7 +49,8 @@ public class TutorService {
         return tutores;
     }
 
-    public String update(TutorEntity tutor) {
+    public String update(TutorEntity tutor) throws Exception {
+        tutor = tutorRepository.findById(tutor.getId()).orElseThrow(() -> new IllegalStateException("Tutor nao encontrado"));
         tutorRepository.save(tutor);
         return MensagensDeSucesso.ALTERACAO_SUCESSO;
     }
