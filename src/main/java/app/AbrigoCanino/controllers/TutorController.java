@@ -53,6 +53,7 @@ public class TutorController {
     public ResponseEntity<ObjetoResposta<Void>> update(@RequestBody TutorEntity tutor){
         ObjetoResposta<Void> resposta = new ObjetoResposta<Void>();
         try{
+
             resposta.setMensagem(tutorService.update(tutor));
             return ResponseEntity.ok(resposta);
         } catch(Exception e){
