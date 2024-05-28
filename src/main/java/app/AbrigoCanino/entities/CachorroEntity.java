@@ -23,26 +23,22 @@ import java.util.List;
 @NoArgsConstructor
 
 public class CachorroEntity extends AbstractEntity {
-    @Column(nullable = false)
-    @NotBlank(message = "O nome do cachorro não pode estar em branco")
+    @Column
     private String nome;
 
-    @Column(nullable = false)
-    @NotBlank(message = "A raça do cachorro não pode estar em branco")
+    @Column
     private String raca;
 
-    @Column(nullable = false)
-    @NotNull(message = "A idade aproximada do cachorro não pode ser nula")
-    @Min(value = 1, message = "A idade aproximada do cachorro deve ser maior que zero")
+    @Column
     private int idadeAproximada;
 
-    @Column(nullable = false)
+    @Column
     @Enumerated(EnumType.STRING)
     private Porte porte;
 
     @Column
     private LocalDate dataDeAdocao;
-    @Column(nullable = false)
+    @Column
     @NotBlank(message = "A descrição do cachorro não pode estar em branco")
     private String descricao;
 }
