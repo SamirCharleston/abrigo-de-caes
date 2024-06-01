@@ -73,16 +73,50 @@ public class RequerimentoService {
     }
 
     public String update(RequerimentoEntity requerimento) throws Exception {
-        RequerimentoEntity requerimentoExistente = requerimentoRepository.findById(requerimento.getId())
+        requerimentoRepository.findById(requerimento.getId())
                 .orElseThrow(() -> new Exception(MensagensDeErro.ID_NAO_ENCONTRADO));
-        requerimentoRepository.save(requerimentoExistente);
+
+        List<CachorroEntity> cachorrosAntigos = requerimentoRepository.findById(requerimento.getId()).get().getCaesRequeridos();
+
+        for(CachorroEntity c : cachorrosAntigos){
+            cachorroRepository.getReferenceById(c.getId()).setStatus(true);
+            cachorroRepository.save(c);
+        }
+
+        List<CachorroEntity> cachorroEntities = new ArrayList<CachorroEntity>();
+        for(CachorroEntity c : requerimento.getCaesRequeridos()){
+            if(!cachorroRepository.existsById(c.getId())){
+                throw new EntityNotFoundException("O cachorro nao pode ser encontrado");
+            }
+
+            //Seta o estado do cachorro para false para que nao possa mais ser retornado para o listAll
+            //Assim esse cachorro nao pode ser adotado mais de uma vez
+            CachorroEntity cachorro = cachorroRepository.getReferenceById(c.getId());
+            cachorro.setStatus(false);
+
+            cachorroEntities.add(cachorro);
+        };
+
+        requerimento.setCaesRequeridos(cachorroEntities);
+
+        requerimentoRepository.save(requerimento);
         return MensagensDeSucesso.ALTERACAO_SUCESSO;
     }
-
+    @Transactional
     public String delete(Long id) throws Exception{
-        if(!requerimentoRepository.existsById(id)){
-            throw new Exception(MensagensDeErro.ID_NAO_ENCONTRADO);
-        }
+
+        RequerimentoEntity requerimento = requerimentoRepository
+                .findById(id).orElseThrow(() -> new Exception(MensagensDeErro.ID_NAO_ENCONTRADO));
+
+        for(CachorroEntity c : requerimento.getCaesRequeridos()){
+
+            //Seta o estado do cachorro para true para que possa ser retornado para o listAll
+            //Assim esse cachorro volta para a lista de adocao
+            CachorroEntity cachorro = cachorroRepository.getReferenceById(c.getId());
+            cachorro.setStatus(true);
+
+            cachorroRepository.save(cachorro);
+        };
         requerimentoRepository.delete(findById(id));
         return MensagensDeSucesso.EXCLUSAO_SUCESSO;
     }
