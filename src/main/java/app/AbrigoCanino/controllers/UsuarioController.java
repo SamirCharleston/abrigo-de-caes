@@ -45,22 +45,4 @@ public class UsuarioController {
         }
     }
 
-    @GetMapping("/usuario-logado")
-    public ResponseEntity<ObjetoResposta<String>>
-    verificaUsuarioLogado(HttpSession session){
-        ObjetoResposta<String> resposta = new ObjetoResposta<>();
-        try{
-            //Inicia a secao do usuario
-            String nomeUsuarioLogado = (String) session.getAttribute("nomeDoUsuario");
-            System.out.println(nomeUsuarioLogado);
-            if(nomeUsuarioLogado == null){
-                throw new Exception("Usuário não está logado");
-            }
-            resposta.setObjeto(nomeUsuarioLogado);
-            return ResponseEntity.ok(resposta);
-        } catch (Exception e){
-            resposta.setMensagem(e.getMessage());
-            return ResponseEntity.badRequest().body(resposta);
-        }
-    }
 }
