@@ -1,8 +1,7 @@
 package app.AbrigoCanino.controllers;
 
-import app.AbrigoCanino.configuracoes.EnderecoEndPoint;
-import app.AbrigoCanino.configuracoes.MensagensDeSucesso;
-import app.AbrigoCanino.configuracoes.ObjetoResposta;
+import app.AbrigoCanino.config.configuracoes.EnderecoEndPoint;
+import app.AbrigoCanino.config.configuracoes.ObjetoResposta;
 import app.AbrigoCanino.entities.ColaboradorEntity;
 import app.AbrigoCanino.service.ColaboradorService;
 import jakarta.validation.Valid;

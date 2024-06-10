@@ -1,4 +1,4 @@
-package app.AbrigoCanino.config;
+package app.AbrigoCanino.config.jwt;
 
 import io.jsonwebtoken.SignatureAlgorithm;
 

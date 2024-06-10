@@ -1,4 +1,4 @@
-package app.AbrigoCanino.configuracoes;
+package app.AbrigoCanino.config.configuracoes;
 
 public abstract class MensagensDeSucesso {
     public static final String CADASTRO_SUCESSO = "Cadastro realizado com sucesso!";

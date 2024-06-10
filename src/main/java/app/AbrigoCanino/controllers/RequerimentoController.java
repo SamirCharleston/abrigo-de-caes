@@ -1,7 +1,7 @@
 package app.AbrigoCanino.controllers;
 
-import app.AbrigoCanino.configuracoes.EnderecoEndPoint;
-import app.AbrigoCanino.configuracoes.ObjetoResposta;
+import app.AbrigoCanino.config.configuracoes.EnderecoEndPoint;
+import app.AbrigoCanino.config.configuracoes.ObjetoResposta;
 import app.AbrigoCanino.entities.RequerimentoEntity;
 import app.AbrigoCanino.service.RequerimentoService;
 import org.springframework.beans.factory.annotation.Autowired;

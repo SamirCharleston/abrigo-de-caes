@@ -1,4 +1,4 @@
-package app.AbrigoCanino.config;
+package app.AbrigoCanino.config.jwt;
 
 import app.AbrigoCanino.auth.LoginRepository;
 import org.springframework.beans.factory.annotation.Autowired;

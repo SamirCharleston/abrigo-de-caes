@@ -1,4 +1,4 @@
-package app.AbrigoCanino.configuracoes;
+package app.AbrigoCanino.config.configuracoes;
 
 import lombok.Data;
 

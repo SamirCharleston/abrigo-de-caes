@@ -1,29 +1,17 @@
 package app.AbrigoCanino.service;
 
 
-import app.AbrigoCanino.configuracoes.MensagensDeErro;
-import app.AbrigoCanino.configuracoes.MensagensDeSucesso;
 import app.AbrigoCanino.entities.TutorEntity;
 import app.AbrigoCanino.repositories.TutorRepository;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 @SpringBootTest
 public class TutorServiceTest {

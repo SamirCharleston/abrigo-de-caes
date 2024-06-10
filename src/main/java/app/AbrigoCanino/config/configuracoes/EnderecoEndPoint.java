@@ -1,4 +1,4 @@
-package app.AbrigoCanino.configuracoes;
+package app.AbrigoCanino.config.configuracoes;
 
 public abstract class EnderecoEndPoint {
     public static final String CADASTRAR = "/cadastrar";

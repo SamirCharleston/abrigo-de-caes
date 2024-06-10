@@ -1,7 +1,7 @@
 package app.AbrigoCanino.service;
 
-import app.AbrigoCanino.configuracoes.MensagensDeErro;
-import app.AbrigoCanino.configuracoes.MensagensDeSucesso;
+import app.AbrigoCanino.config.configuracoes.MensagensDeErro;
+import app.AbrigoCanino.config.configuracoes.MensagensDeSucesso;
 import app.AbrigoCanino.entities.CachorroEntity;
 import app.AbrigoCanino.repositories.CachorroRepository;
 import org.springframework.beans.factory.annotation.Autowired;

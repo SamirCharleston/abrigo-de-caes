@@ -1,7 +1,7 @@
 package app.AbrigoCanino.service;
 
-import app.AbrigoCanino.configuracoes.MensagensDeErro;
-import app.AbrigoCanino.configuracoes.MensagensDeSucesso;
+import app.AbrigoCanino.config.configuracoes.MensagensDeErro;
+import app.AbrigoCanino.config.configuracoes.MensagensDeSucesso;
 import app.AbrigoCanino.entities.TutorEntity;
 import app.AbrigoCanino.repositories.TutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 

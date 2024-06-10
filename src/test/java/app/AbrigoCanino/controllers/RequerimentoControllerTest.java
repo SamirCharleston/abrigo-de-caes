@@ -1,9 +1,9 @@
 package app.AbrigoCanino.controllers;
 
 
-import app.AbrigoCanino.configuracoes.MensagensDeErro;
-import app.AbrigoCanino.configuracoes.MensagensDeSucesso;
-import app.AbrigoCanino.configuracoes.ObjetoResposta;
+import app.AbrigoCanino.config.configuracoes.MensagensDeErro;
+import app.AbrigoCanino.config.configuracoes.MensagensDeSucesso;
+import app.AbrigoCanino.config.configuracoes.ObjetoResposta;
 import app.AbrigoCanino.entities.CachorroEntity;
 import app.AbrigoCanino.entities.RequerimentoEntity;
 import app.AbrigoCanino.entities.TutorEntity;
@@ -16,7 +16,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import java.util.Collections;
 
 import java.util.ArrayList;
 import java.util.List;

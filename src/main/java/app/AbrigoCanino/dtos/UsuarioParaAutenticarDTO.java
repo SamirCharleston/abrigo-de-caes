@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 public class UsuarioParaAutenticarDTO {
     @NotBlank(message = "O nome deve conter letrar e ou numeros")
-    private String nome;
+    private String username;
     @NotBlank(message = "a senha deve conter letrar e ou numeros")
-    private String senha;
+    private String password;
 }

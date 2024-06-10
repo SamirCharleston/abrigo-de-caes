@@ -5,14 +5,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
 public class Usuario implements UserDetails{
@@ -93,6 +91,13 @@ public class Usuario implements UserDetails{
 		this.password = password;
 	}
 
-
-
+	@PrePersist
+	@PreUpdate
+	private void encryptPassword() {
+		BCryptPasswordEncoder encryptPassword = new BCryptPasswordEncoder();
+		this.role = "USER";
+		if (this.password != null && !this.password.matches("^\\$2[abxy]\\$.*$")) {
+			this.password = BCrypt.hashpw(this.password, BCrypt.gensalt());
+		}
+	}
 }

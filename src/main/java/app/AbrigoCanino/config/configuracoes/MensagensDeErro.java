@@ -1,4 +1,4 @@
-package app.AbrigoCanino.configuracoes;
+package app.AbrigoCanino.config.configuracoes;
 
 public abstract class MensagensDeErro {
     public static final String ID_NAO_ENCONTRADO = "Id não encontrado";

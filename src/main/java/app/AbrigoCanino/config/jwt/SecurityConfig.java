@@ -1,4 +1,4 @@
-package app.AbrigoCanino.config;
+package app.AbrigoCanino.config.jwt;
 
 import java.util.Arrays;
 
@@ -61,6 +61,6 @@ public class SecurityConfig  {
 		bean.setOrder(-102);
 		return bean;
 	}
-	
+
 
 }
