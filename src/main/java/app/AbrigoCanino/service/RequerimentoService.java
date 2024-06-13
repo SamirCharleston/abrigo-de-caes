@@ -1,7 +1,7 @@
 package app.AbrigoCanino.service;
 
-import app.AbrigoCanino.config.configuracoes.MensagensDeErro;
-import app.AbrigoCanino.config.configuracoes.MensagensDeSucesso;
+import app.AbrigoCanino.config.configuracoesEspecificas.MensagensDeErro;
+import app.AbrigoCanino.config.configuracoesEspecificas.MensagensDeSucesso;
 import app.AbrigoCanino.entities.CachorroEntity;
 import app.AbrigoCanino.entities.RequerimentoEntity;
 import app.AbrigoCanino.entities.TutorEntity;

@@ -1,15 +1,10 @@
 package app.AbrigoCanino.service;
 
 import app.AbrigoCanino.auth.Usuario;
-import app.AbrigoCanino.dtos.UsuarioAutenticadoDTO;
 import app.AbrigoCanino.dtos.UsuarioParaAutenticarDTO;
-import app.AbrigoCanino.entities.UsuarioEntity;
 import app.AbrigoCanino.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.naming.AuthenticationException;
-import java.util.UUID;
 
 @Service
 public class UsuarioService {
@@ -23,6 +18,13 @@ public class UsuarioService {
         }
 
         Usuario usuarioASalvar = new Usuario();
+
+        if(usuario.getRole().equals("ADMIN")){
+            usuarioASalvar.setRole("ADMIN");
+        } else {
+            usuarioASalvar.setRole("USER");
+        }
+
         usuarioASalvar.setUsername(usuario.getUsername());
         usuarioASalvar.setPassword(usuario.getPassword());
 

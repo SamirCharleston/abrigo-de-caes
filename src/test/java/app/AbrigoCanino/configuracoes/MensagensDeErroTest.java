@@ -1,6 +1,6 @@
 package app.AbrigoCanino.configuracoes;
 
-import app.AbrigoCanino.config.configuracoes.MensagensDeErro;
+import app.AbrigoCanino.config.configuracoesEspecificas.MensagensDeErro;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

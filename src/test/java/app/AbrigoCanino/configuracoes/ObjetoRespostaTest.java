@@ -1,6 +1,6 @@
 package app.AbrigoCanino.configuracoes;
 
-import app.AbrigoCanino.config.configuracoes.ObjetoResposta;
+import app.AbrigoCanino.config.configuracoesEspecificas.ObjetoResposta;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

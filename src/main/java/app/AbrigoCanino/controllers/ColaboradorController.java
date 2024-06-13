@@ -1,12 +1,13 @@
 package app.AbrigoCanino.controllers;
 
-import app.AbrigoCanino.config.configuracoes.EnderecoEndPoint;
-import app.AbrigoCanino.config.configuracoes.ObjetoResposta;
+import app.AbrigoCanino.config.configuracoesEspecificas.EnderecoEndPoint;
+import app.AbrigoCanino.config.configuracoesEspecificas.ObjetoResposta;
 import app.AbrigoCanino.entities.ColaboradorEntity;
 import app.AbrigoCanino.service.ColaboradorService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
 public class ColaboradorController {
     @Autowired
     private ColaboradorService colaboradorService;
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(EnderecoEndPoint.CADASTRAR)
     public ResponseEntity<ObjetoResposta<Void>> save(@RequestBody @Valid ColaboradorEntity colaborador){
         ObjetoResposta<Void> resposta = new ObjetoResposta<>();
@@ -27,6 +29,7 @@ public class ColaboradorController {
             return ResponseEntity.badRequest().body(resposta);
         }
     }
+    @PreAuthorize("hasRole('USER') OR hasRole('ADMIN')")
     @GetMapping(EnderecoEndPoint.BUSCAR_ID)
     public ResponseEntity<ObjetoResposta<ColaboradorEntity>> findById(@PathVariable Long id){
         ObjetoResposta<ColaboradorEntity> resposta = new ObjetoResposta<>();
@@ -38,6 +41,7 @@ public class ColaboradorController {
             return ResponseEntity.badRequest().body(resposta);
         }
     }
+    @PreAuthorize("hasRole('USER') OR hasRole('ADMIN')")
     @GetMapping(EnderecoEndPoint.LISTAR)
     public ResponseEntity<ObjetoResposta<List<ColaboradorEntity>>> findAll(){
         ObjetoResposta<List<ColaboradorEntity>> resposta = new ObjetoResposta<>();
@@ -49,6 +53,7 @@ public class ColaboradorController {
             return ResponseEntity.badRequest().body(resposta);
         }
     }
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping(EnderecoEndPoint.ATUALIZAR)
     public ResponseEntity<ObjetoResposta<Void>> update(@RequestBody @Valid ColaboradorEntity colaborador){
         ObjetoResposta<Void> resposta = new ObjetoResposta<>();
@@ -60,6 +65,7 @@ public class ColaboradorController {
             return ResponseEntity.badRequest().body(resposta);
         }
     }
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/colaborador")
     public ResponseEntity<ObjetoResposta<Void>> delete(@RequestParam("id") Long id) {
         ObjetoResposta<Void> resposta = new ObjetoResposta<>();
@@ -72,5 +78,5 @@ public class ColaboradorController {
             return ResponseEntity.badRequest().body(resposta);
         }
     }
-    }
+}
 

@@ -16,4 +16,5 @@ public class UsuarioParaAutenticarDTO {
     private String username;
     @NotBlank(message = "a senha deve conter letrar e ou numeros")
     private String password;
+    private String role;
 }

@@ -1,9 +1,9 @@
 package app.AbrigoCanino.controllers;
 
 
-import app.AbrigoCanino.config.configuracoes.MensagensDeErro;
-import app.AbrigoCanino.config.configuracoes.MensagensDeSucesso;
-import app.AbrigoCanino.config.configuracoes.ObjetoResposta;
+import app.AbrigoCanino.config.configuracoesEspecificas.MensagensDeErro;
+import app.AbrigoCanino.config.configuracoesEspecificas.MensagensDeSucesso;
+import app.AbrigoCanino.config.configuracoesEspecificas.ObjetoResposta;
 import app.AbrigoCanino.entities.CachorroEntity;
 import app.AbrigoCanino.entities.RequerimentoEntity;
 import app.AbrigoCanino.entities.TutorEntity;

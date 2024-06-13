@@ -1,6 +1,6 @@
 package app.AbrigoCanino.configuracoes;
 
-import app.AbrigoCanino.config.configuracoes.EnderecoEndPoint;
+import app.AbrigoCanino.config.configuracoesEspecificas.EnderecoEndPoint;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

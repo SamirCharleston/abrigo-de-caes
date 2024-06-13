@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.List;
 
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,7 +24,7 @@ public class Usuario implements UserDetails{
 	private String username;
 	private String password;
 	private String role;
-    
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<GrantedAuthority> authorities = new ArrayList<>();
@@ -92,12 +93,11 @@ public class Usuario implements UserDetails{
 	}
 
 	@PrePersist
-	@PreUpdate
 	private void encryptPassword() {
-		BCryptPasswordEncoder encryptPassword = new BCryptPasswordEncoder();
-		this.role = "USER";
+		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 		if (this.password != null && !this.password.matches("^\\$2[abxy]\\$.*$")) {
-			this.password = BCrypt.hashpw(this.password, BCrypt.gensalt());
+			this.password = bCryptPasswordEncoder.encode(this.password);
 		}
 	}
+
 }

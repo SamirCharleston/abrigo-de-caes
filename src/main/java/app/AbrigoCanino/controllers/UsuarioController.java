@@ -1,11 +1,8 @@
 package app.AbrigoCanino.controllers;
 
-import app.AbrigoCanino.auth.Usuario;
-import app.AbrigoCanino.config.configuracoes.ObjetoResposta;
-import app.AbrigoCanino.dtos.UsuarioAutenticadoDTO;
+import app.AbrigoCanino.config.configuracoesEspecificas.ObjetoResposta;
 import app.AbrigoCanino.dtos.UsuarioParaAutenticarDTO;
 import app.AbrigoCanino.service.UsuarioService;
-import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/api/register")
-@CrossOrigin("*")
+@CrossOrigin(origins = "http://localhost:4200")
 public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
