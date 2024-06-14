@@ -1,5 +1,6 @@
 package app.AbrigoCanino.service;
 
+import app.AbrigoCanino.auth.Authorization;
 import app.AbrigoCanino.auth.Usuario;
 import app.AbrigoCanino.dtos.UsuarioParaAutenticarDTO;
 import app.AbrigoCanino.repositories.UsuarioRepository;
@@ -19,10 +20,10 @@ public class UsuarioService {
 
         Usuario usuarioASalvar = new Usuario();
 
-        if(usuario.getRole().equals("ADMIN")){
-            usuarioASalvar.setRole("ADMIN");
+        if(usuario.getRole() != null && usuario.getRole().equals("ADMIN")){
+            usuarioASalvar.setRole(Authorization.ADMIN);
         } else {
-            usuarioASalvar.setRole("USER");
+            usuarioASalvar.setRole(Authorization.USER);
         }
 
         usuarioASalvar.setUsername(usuario.getUsername());

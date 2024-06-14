@@ -33,7 +33,6 @@ public class CachorroController {
             return ResponseEntity.badRequest().body(resposta);
         }
     }
-    @PreAuthorize("hasRole('USER') OR hasRole('ADMIN')")
     @GetMapping(EnderecoEndPoint.BUSCAR_ID)
     public ResponseEntity<ObjetoResposta<CachorroEntity>> findById(@RequestParam Long id){
         ObjetoResposta<CachorroEntity> resposta = new ObjetoResposta<>();
@@ -45,7 +44,6 @@ public class CachorroController {
             return ResponseEntity.badRequest().body(resposta);
         }
     }
-    @PreAuthorize("hasRole('USER') OR hasRole('ADMIN')")
     @GetMapping(EnderecoEndPoint.LISTAR)
     public ResponseEntity<ObjetoResposta<List<CachorroEntity>>> findAll(){
         ObjetoResposta<List<CachorroEntity>> resposta = new ObjetoResposta<>();
@@ -57,7 +55,6 @@ public class CachorroController {
             return ResponseEntity.badRequest().body(resposta);
         }
     }
-    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping(EnderecoEndPoint.ATUALIZAR)
     public ResponseEntity<ObjetoResposta<Void>> update(@RequestBody CachorroEntity cachorro){
         ObjetoResposta<Void> resposta = new ObjetoResposta<>();

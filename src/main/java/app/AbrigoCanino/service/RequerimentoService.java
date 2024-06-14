@@ -69,6 +69,7 @@ public class RequerimentoService {
     public List<RequerimentoEntity> findAll() throws Exception {
         if(requerimentoRepository.findAll().isEmpty())
             throw new Exception(MensagensDeErro.LISTA_VAZIA);
+
         return requerimentoRepository.findAll();
     }
 

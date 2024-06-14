@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface TutorRepository extends JpaRepository<TutorEntity, Long> {
     Optional<TutorEntity> getReferenceByNome(String nome);
     boolean existsByNome(String nome);
+    TutorEntity findByNome(String nome);
 }

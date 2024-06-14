@@ -17,7 +17,7 @@ import java.util.List;
 public class RequerimentoController {
     @Autowired
     private RequerimentoService requerimentoService;
-    @PreAuthorize("hasRole('ADMIN')")
+
     @PostMapping(EnderecoEndPoint.CADASTRAR)
     public ResponseEntity<ObjetoResposta<Void>> save(@RequestBody RequerimentoEntity requerimento){
         ObjetoResposta<Void> resposta = new ObjetoResposta<>();
@@ -29,7 +29,7 @@ public class RequerimentoController {
             return ResponseEntity.badRequest().body(resposta);
         }
     }
-    @PreAuthorize("hasRole('ADMIN') OR hasRole('USER')")
+
     @GetMapping(EnderecoEndPoint.BUSCAR_ID)
     public ResponseEntity<ObjetoResposta<RequerimentoEntity>> findById(@RequestParam Long id){
         ObjetoResposta<RequerimentoEntity> resposta = new ObjetoResposta<>();
@@ -41,7 +41,7 @@ public class RequerimentoController {
             return ResponseEntity.badRequest().body(resposta);
         }
     }
-    @PreAuthorize("hasRole('ADMIN') OR hasRole('USER')")
+
     @GetMapping(EnderecoEndPoint.LISTAR)
     public ResponseEntity<ObjetoResposta<List<RequerimentoEntity>>> findAll(){
         ObjetoResposta<List<RequerimentoEntity>> resposta = new ObjetoResposta<>();
@@ -53,7 +53,6 @@ public class RequerimentoController {
             return ResponseEntity.badRequest().body(resposta);
         }
     }
-    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping(EnderecoEndPoint.ATUALIZAR)
     public ResponseEntity<ObjetoResposta<Void>> update(@RequestBody RequerimentoEntity requerimento){
         ObjetoResposta<Void> resposta = new ObjetoResposta<>();

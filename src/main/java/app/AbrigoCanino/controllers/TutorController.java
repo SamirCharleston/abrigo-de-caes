@@ -29,7 +29,7 @@ public class TutorController {
             return ResponseEntity.badRequest().body(resposta);
         }
     }
-    @PreAuthorize("hasRole('ADMIN') OR hasRole('USER')")
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(EnderecoEndPoint.BUSCAR_ID)
     public ResponseEntity<ObjetoResposta<TutorEntity>> findById(@RequestParam Long id){
         ObjetoResposta<TutorEntity> resposta = new ObjetoResposta<TutorEntity>();
@@ -41,7 +41,7 @@ public class TutorController {
             return ResponseEntity.badRequest().body(resposta);
         }
     }
-    @PreAuthorize("hasRole('ADMIN') OR hasRole('USER')")
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(EnderecoEndPoint.LISTAR)
     public ResponseEntity<ObjetoResposta<List<TutorEntity>>> findAll(){
         ObjetoResposta<List<TutorEntity>> resposta = new ObjetoResposta<List<TutorEntity>>();

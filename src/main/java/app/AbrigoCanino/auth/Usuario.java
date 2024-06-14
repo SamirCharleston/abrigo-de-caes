@@ -23,12 +23,14 @@ public class Usuario implements UserDetails{
 	private Long id;
 	private String username;
 	private String password;
-	private String role;
+	@Enumerated(EnumType.STRING)
+	private Authorization role;
 
+//	private String role;
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<GrantedAuthority> authorities = new ArrayList<>();
-	    authorities.add(new SimpleGrantedAuthority(this.role));
+	    authorities.add(new SimpleGrantedAuthority(this.role.toString()));
 	    return authorities;
 	}
 
@@ -76,11 +78,11 @@ public class Usuario implements UserDetails{
 		this.id = id;
 	}
 
-	public String getRole() {
+	public Authorization getRole() {
 		return role;
 	}
 
-	public void setRole(String role) {
+	public void setRole(Authorization role) {
 		this.role = role;
 	}
 
