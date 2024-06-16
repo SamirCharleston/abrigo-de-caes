@@ -20,10 +20,11 @@ public class UsuarioService {
 
         Usuario usuarioASalvar = new Usuario();
 
-        if(usuario.getRole() != null && usuario.getRole().equals("ADMIN")){
-            usuarioASalvar.setRole(Authorization.ADMIN);
+        //Somente no primeiro cadastro de usuario o mesmo sera registrado como RESPONSAVEL
+        if(usuarioRepository.isThereUser()){
+            usuarioASalvar.setRole(Authorization.ROLE_VOLUNTARIO);
         } else {
-            usuarioASalvar.setRole(Authorization.USER);
+            usuarioASalvar.setRole(Authorization.ROLE_RESPONSAVEL);
         }
 
         usuarioASalvar.setUsername(usuario.getUsername());

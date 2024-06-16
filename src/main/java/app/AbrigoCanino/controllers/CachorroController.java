@@ -2,6 +2,7 @@ package app.AbrigoCanino.controllers;
 
 import app.AbrigoCanino.config.configuracoesEspecificas.EnderecoEndPoint;
 import app.AbrigoCanino.config.configuracoesEspecificas.ObjetoResposta;
+import app.AbrigoCanino.config.configuracoesEspecificas.PermissaoPara;
 import app.AbrigoCanino.entities.CachorroEntity;
 import app.AbrigoCanino.service.CachorroService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,6 @@ public class CachorroController {
 
     @Autowired
     private CachorroService cachorroService;
-    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(EnderecoEndPoint.CADASTRAR)
     public ResponseEntity<ObjetoResposta<Void>> save(@RequestBody CachorroEntity cachorro){
         ObjetoResposta<Void> resposta = new ObjetoResposta<>();
@@ -66,7 +66,7 @@ public class CachorroController {
             return ResponseEntity.badRequest().body(resposta);
         }
     }
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize(PermissaoPara.RESPONSAVEL)
     @DeleteMapping(EnderecoEndPoint.DELETAR)
     public ResponseEntity<ObjetoResposta<Void>> delete(@RequestParam("id") Long id){
         ObjetoResposta<Void> resposta = new ObjetoResposta<>();

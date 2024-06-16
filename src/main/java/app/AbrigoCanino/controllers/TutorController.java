@@ -2,6 +2,7 @@ package app.AbrigoCanino.controllers;
 
 import app.AbrigoCanino.config.configuracoesEspecificas.EnderecoEndPoint;
 import app.AbrigoCanino.config.configuracoesEspecificas.ObjetoResposta;
+import app.AbrigoCanino.config.configuracoesEspecificas.PermissaoPara;
 import app.AbrigoCanino.entities.TutorEntity;
 import app.AbrigoCanino.service.TutorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,10 @@ import java.util.List;
 public class TutorController {
     @Autowired
     private TutorService tutorService;
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize(PermissaoPara.RESPONSAVEL)
     @PostMapping(EnderecoEndPoint.CADASTRAR)
     public ResponseEntity<ObjetoResposta<Void>> save(@RequestBody TutorEntity tutor){
-        ObjetoResposta<Void> resposta = new ObjetoResposta<Void>();
+        ObjetoResposta<Void> resposta = new ObjetoResposta<>();
         try{
             resposta.setMensagem(tutorService.save(tutor));
             return ResponseEntity.ok(resposta);
@@ -29,7 +30,7 @@ public class TutorController {
             return ResponseEntity.badRequest().body(resposta);
         }
     }
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize(PermissaoPara.RESPONSAVEL)
     @GetMapping(EnderecoEndPoint.BUSCAR_ID)
     public ResponseEntity<ObjetoResposta<TutorEntity>> findById(@RequestParam Long id){
         ObjetoResposta<TutorEntity> resposta = new ObjetoResposta<TutorEntity>();
@@ -41,10 +42,10 @@ public class TutorController {
             return ResponseEntity.badRequest().body(resposta);
         }
     }
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize(PermissaoPara.RESPONSAVEL)
     @GetMapping(EnderecoEndPoint.LISTAR)
     public ResponseEntity<ObjetoResposta<List<TutorEntity>>> findAll(){
-        ObjetoResposta<List<TutorEntity>> resposta = new ObjetoResposta<List<TutorEntity>>();
+        ObjetoResposta<List<TutorEntity>> resposta = new ObjetoResposta<>();
         try{
             resposta.setObjeto(tutorService.findAll());
             return ResponseEntity.ok(resposta);
@@ -53,7 +54,7 @@ public class TutorController {
             return ResponseEntity.badRequest().body(resposta);
         }
     }
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize(PermissaoPara.RESPONSAVEL)
     @PutMapping(EnderecoEndPoint.ATUALIZAR)
     public ResponseEntity<ObjetoResposta<Void>> update(@RequestBody TutorEntity tutor){
         ObjetoResposta<Void> resposta = new ObjetoResposta<Void>();
@@ -66,7 +67,7 @@ public class TutorController {
             return ResponseEntity.badRequest().body(resposta);
         }
     }
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize(PermissaoPara.RESPONSAVEL)
     @DeleteMapping(EnderecoEndPoint.DELETAR)
     public ResponseEntity<ObjetoResposta<Void>> delete(@RequestParam("id") Long id){
         ObjetoResposta<Void> resposta = new ObjetoResposta<Void>();

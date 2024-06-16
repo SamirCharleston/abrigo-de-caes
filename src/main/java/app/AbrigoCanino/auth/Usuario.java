@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import app.AbrigoCanino.repositories.UsuarioRepository;
 import jakarta.persistence.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -25,6 +26,7 @@ public class Usuario implements UserDetails{
 	private String password;
 	@Enumerated(EnumType.STRING)
 	private Authorization role;
+
 
 //	private String role;
 	@Override
@@ -97,6 +99,7 @@ public class Usuario implements UserDetails{
 	@PrePersist
 	private void encryptPassword() {
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+
 		if (this.password != null && !this.password.matches("^\\$2[abxy]\\$.*$")) {
 			this.password = bCryptPasswordEncoder.encode(this.password);
 		}

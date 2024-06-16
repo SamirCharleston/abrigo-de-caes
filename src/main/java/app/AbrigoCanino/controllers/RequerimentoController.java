@@ -2,6 +2,7 @@ package app.AbrigoCanino.controllers;
 
 import app.AbrigoCanino.config.configuracoesEspecificas.EnderecoEndPoint;
 import app.AbrigoCanino.config.configuracoesEspecificas.ObjetoResposta;
+import app.AbrigoCanino.config.configuracoesEspecificas.PermissaoPara;
 import app.AbrigoCanino.entities.RequerimentoEntity;
 import app.AbrigoCanino.service.RequerimentoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import java.util.List;
 public class RequerimentoController {
     @Autowired
     private RequerimentoService requerimentoService;
-
+    @PreAuthorize(PermissaoPara.RESPONSAVEL)
     @PostMapping(EnderecoEndPoint.CADASTRAR)
     public ResponseEntity<ObjetoResposta<Void>> save(@RequestBody RequerimentoEntity requerimento){
         ObjetoResposta<Void> resposta = new ObjetoResposta<>();
@@ -53,6 +54,7 @@ public class RequerimentoController {
             return ResponseEntity.badRequest().body(resposta);
         }
     }
+    @PreAuthorize(PermissaoPara.RESPONSAVEL)
     @PutMapping(EnderecoEndPoint.ATUALIZAR)
     public ResponseEntity<ObjetoResposta<Void>> update(@RequestBody RequerimentoEntity requerimento){
         ObjetoResposta<Void> resposta = new ObjetoResposta<>();
@@ -64,7 +66,7 @@ public class RequerimentoController {
             return ResponseEntity.badRequest().body(resposta);
         }
     }
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize(PermissaoPara.RESPONSAVEL)
     @DeleteMapping(EnderecoEndPoint.DELETAR)
     public ResponseEntity<ObjetoResposta<Void>> delete(@RequestParam("id") Long id){
         ObjetoResposta<Void> resposta = new ObjetoResposta<>();

@@ -1,6 +1,6 @@
 package app.AbrigoCanino.auth;
 
 public enum Authorization {
-    ADMIN,
-    USER
+    ROLE_RESPONSAVEL,
+    ROLE_VOLUNTARIO
 }
